@@ -1,0 +1,6 @@
+[submodule "orion-launcher"]
+	path = orion-launcher
+	url = https://github.com/Pryaxis/orion-launcher
+[submodule "orion-core"]
+	path = orion-core
+	url = https://github.com/Pryaxis/orion-core
