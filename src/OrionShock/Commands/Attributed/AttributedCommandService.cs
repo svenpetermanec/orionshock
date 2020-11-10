@@ -21,6 +21,9 @@ namespace OrionShock.Commands.Attributed {
         }
 
         /// <inheritdoc />
+        public ICommand GetCommand(string name) => _commands.FirstOrDefault(c => c.Name == name);
+
+        /// <inheritdoc />
         public IEnumerable<ICommand> GetCommands(Predicate<ICommand> filter = null) =>
             _commands.Where(c => filter?.Invoke(c) ?? true);
 
@@ -36,12 +39,12 @@ namespace OrionShock.Commands.Attributed {
                 where commandAttribute != null
                 select (commandAttribute, method);
             foreach (var (commandAttribute, handlerMethod) in commandHandlers) {
-                if (handlerMethod.ReturnType == typeof(void)) {
+                if (handlerMethod.ReturnType != typeof(void)) {
                     _logger.Warning($"Command handler '{handlerMethod.Name}' does not return void. Skipping");
                     continue;
                 }
 
-                var command = new AttributedCommand(null, commandAttribute.Name, commandAttribute.Description,
+                var command = new AttributedCommand(Parsers.Instance, commandAttribute.Name, commandAttribute.Description,
                     commandAttribute.AllowConsole, handlerMethod, obj);
                 _commands.Add(command);
             }

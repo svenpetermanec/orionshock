@@ -7,12 +7,12 @@ namespace OrionShock.Commands {
     [PublicAPI]
     public readonly struct CommandContext {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CommandContext" /> structure with the specified sender and command
-        ///     line.
+        ///     Initializes a new instance of the <see cref="CommandContext" /> structure with the specified sender and
+        ///     command line.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="commandLine">The full command-line representation of the command.</param>
-        public CommandContext(ICommandSender sender, string commandLine) {
+        internal CommandContext(ICommandSender sender, string commandLine) {
             Sender = sender;
             CommandLine = commandLine;
         }

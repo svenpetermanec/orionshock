@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using Orion.Core;
 
@@ -7,14 +8,22 @@ namespace OrionShock.Configuration {
     ///     Represents a JSON-based configuration service.
     /// </summary>
     /// <typeparam name="TConfiguration">The type of configuration this instance encapsulates.</typeparam>
-    [Binding("JSON Configuration Service", Priority = BindingPriority.Normal)]
-    public sealed class JsonConfigurationService<TConfiguration> : IConfigurationService<TConfiguration>
+    [Binding("JSON Configuration Service", Author = "ivanbiljan", Priority = BindingPriority.Normal)]
+    internal sealed class JsonConfigurationService<TConfiguration> : IConfigurationService<TConfiguration>
         where TConfiguration : new() {
         public TConfiguration Configuration { get; private set; } = new TConfiguration();
 
-        public void Read(string path) => JsonConvert.SerializeObject(Configuration, Formatting.Indented);
+        public void Read(string path) {
+            if (File.Exists(path)) {
+                Configuration = JsonConvert.DeserializeObject<TConfiguration>(File.ReadAllText(path));
+                return;
+            }
+
+            Configuration = new TConfiguration();
+            Write(path);
+        }
 
         public void Write(string path) =>
-            Configuration = JsonConvert.DeserializeObject<TConfiguration>(File.ReadAllText(path));
+            File.WriteAllText(path, JsonConvert.SerializeObject(Configuration, Formatting.Indented));
     }
 }

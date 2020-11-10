@@ -90,7 +90,11 @@ namespace OrionShock.Commands.Attributed {
                 var optionAttribute = parameter.GetCustomAttribute<OptionAttribute>();
                 if (optionAttribute is null) {
                     if (!parameter.IsOptional) {
-                        arguments[i] = inputMetadata.RequiredArguments[requiredArgumentIndex++];
+                        if (requiredArgumentIndex >= inputMetadata.RequiredArguments.Count) {
+                            throw new ArgumentMismatchException("Insufficient number of arguments.");
+                        }
+                        
+                        arguments[i] = parser(inputMetadata.RequiredArguments[requiredArgumentIndex++]);
                     }
                     else {
                         arguments[i] = inputMetadata.Options.TryGetValue(parameter.Name, out var optionValue)

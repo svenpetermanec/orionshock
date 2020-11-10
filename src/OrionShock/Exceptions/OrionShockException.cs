@@ -7,11 +7,11 @@ namespace OrionShock.Exceptions {
     /// </summary>
     public class OrionShockException : Exception {
         /// <inheritdoc />
-        public OrionShockException([CanBeNull] string? message) : base(message) {
+        public OrionShockException([CanBeNull] string message) : base(message) {
         }
 
         /// <inheritdoc />
-        public OrionShockException([CanBeNull] string? message, [CanBeNull] Exception? innerException) : base(message, innerException) {
+        public OrionShockException([CanBeNull] string message, [CanBeNull] Exception innerException) : base(message, innerException) {
         }
     }
 }

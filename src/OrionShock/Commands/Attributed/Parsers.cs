@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using OrionShock.Extensions;
 
 namespace OrionShock.Commands.Attributed {
     /// <summary>
-    /// Represents a collection of parsers.
+    ///     Represents a collection of parsers. This class is a singleton.
     /// </summary>
     public sealed class Parsers {
+        private static readonly Lazy<Parsers> _instance = new Lazy<Parsers>(() => new Parsers());
+
         private static readonly IDictionary<Type, Func<string, object>> PrimitiveParsers =
             new Dictionary<Type, Func<string, object>> {
                 [typeof(bool)] = s => bool.Parse(s),
@@ -27,11 +28,19 @@ namespace OrionShock.Commands.Attributed {
             _parsers = new Dictionary<Type, Func<string, object>>();
 
         /// <summary>
-        /// Adds a parser for the specified type.
+        ///     Gets the <see cref="Parsers" /> instance.
         /// </summary>
-        /// <param name="type">The type, which must not be <see langword="null"/>.</param>
-        /// <param name="parser">The parser, which must not be <see langword="null"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="parser"/> is <see langword="null"/>.</exception>
+        public static Parsers Instance => _instance.Value;
+
+        /// <summary>
+        ///     Adds a parser for the specified type.
+        /// </summary>
+        /// <param name="type">The type, which must not be <see langword="null" />.</param>
+        /// <param name="parser">The parser, which must not be <see langword="null" />.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="type" /> or <paramref name="parser" /> is
+        ///     <see langword="null" />.
+        /// </exception>
         public void AddParser([NotNull] Type type, [NotNull] Func<string, object> parser) {
             if (type is null) {
                 throw new ArgumentNullException(nameof(type));
@@ -41,24 +50,11 @@ namespace OrionShock.Commands.Attributed {
         }
 
         /// <summary>
-        /// Removes a given type's parser.
+        ///     Gets the parser for the specified type, or <see langword="null" /> if the parser does not exist.
         /// </summary>
-        /// <param name="type">The type, which must not be <see langword="null"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> is <see langword="null"/>.</exception>
-        public void RemoveParser([NotNull] Type type) {
-            if (type is null) {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            _parsers.Remove(type);
-        }
-
-        /// <summary>
-        /// Gets the parser for the specified type, or <see langword="null"/> if the parser does not exist.
-        /// </summary>
-        /// <param name="type">The type, which must not be <see langword="null"/>.</param>
-        /// <returns>The parser, or <see langword="null"/> if the parser does not exist.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> is <see langword="null"/>.</exception>
+        /// <param name="type">The type, which must not be <see langword="null" />.</param>
+        /// <returns>The parser, or <see langword="null" /> if the parser does not exist.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type" /> is <see langword="null" />.</exception>
         [CanBeNull]
         public Func<string, object> GetParser([NotNull] Type type) {
             if (type is null) {
@@ -70,6 +66,19 @@ namespace OrionShock.Commands.Attributed {
             }
 
             return _parsers.GetValueOrDefault(type);
+        }
+
+        /// <summary>
+        ///     Removes a given type's parser.
+        /// </summary>
+        /// <param name="type">The type, which must not be <see langword="null" />.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="type" /> is <see langword="null" />.</exception>
+        public void RemoveParser([NotNull] Type type) {
+            if (type is null) {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            _parsers.Remove(type);
         }
     }
 }

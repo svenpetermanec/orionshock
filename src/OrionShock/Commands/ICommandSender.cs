@@ -12,6 +12,6 @@ namespace OrionShock.Commands {
         ///     Sends a message.
         /// </summary>
         /// <param name="message">The message, which must not be <see langword="null" />.</param>
-        void SendMessage([NotNull] string message) => SendMessage(message);
+        void SendMessage([NotNull] string message);
     }
 }

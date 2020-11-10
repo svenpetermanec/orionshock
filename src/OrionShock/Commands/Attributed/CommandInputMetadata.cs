@@ -70,19 +70,30 @@ namespace OrionShock.Commands.Attributed {
         private static string ParseCommandName(IReadOnlyCollection<string> availableCommandNames,
             IReadOnlyList<string> tokens, ref int index) {
             Debug.Assert(tokens.Count > 0);
-
+            
             var commandName = default(string);
+            var i = 1;
             var builder = new StringBuilder(tokens[0]);
-            for (var i = 1; i < tokens.Count; ++i) {
+            // for (var i = 1; i < tokens.Count; ++i) {
+            //     var tempCommand = builder.ToString();
+            //     if (!availableCommandNames.Contains(tempCommand)) {
+            //         break;
+            //     }
+            //
+            //     commandName = tempCommand;
+            //     index = i;
+            //     builder.Append(" " + tokens[i]);
+            //}
+            do {
                 var tempCommand = builder.ToString();
                 if (!availableCommandNames.Contains(tempCommand)) {
                     break;
                 }
-
+                
                 commandName = tempCommand;
                 index = i;
-                builder.Append(" " + tokens[i]);
-            }
+                builder.Append(" " + tokens.ElementAtOrDefault(i));
+            } while (i < tokens.Count);
 
             return commandName;
         }

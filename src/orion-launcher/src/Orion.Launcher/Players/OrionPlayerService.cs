@@ -20,6 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Orion.Core;
@@ -28,6 +29,7 @@ using Orion.Core.Events.Packets;
 using Orion.Core.Events.Players;
 using Orion.Core.Packets;
 using Orion.Core.Packets.DataStructures.Modules;
+using Orion.Core.Packets.Npcs;
 using Orion.Core.Packets.Players;
 using Orion.Core.Packets.Server;
 using Orion.Core.Players;
@@ -71,7 +73,7 @@ namespace Orion.Launcher.Players
 
             // Note that the last player should be ignored, as it is not a real player.
             _players = new WrappedReadOnlyList<OrionPlayer, Terraria.Player>(
-                Terraria.Main.player.AsMemory(..^1),
+                Terraria.Main.player.AsMemory(),
                 (playerIndex, terrariaPlayer) => new OrionPlayer(playerIndex, terrariaPlayer, events, log));
 
             foreach (var packetId in (PacketId[])Enum.GetValues(typeof(PacketId)))
@@ -161,6 +163,8 @@ namespace Orion.Launcher.Players
             {
                 handler = _onReceivePacketHandlers[packetId] ?? OnReceivePacket<UnknownPacket>;
             }
+            
+            _log.Debug($"RX {(PacketId)packetId}");
 
             handler(buffer.whoAmI, span);
             return OTAPI.HookResult.Cancel;
@@ -177,6 +181,8 @@ namespace Orion.Launcher.Players
 
             var span = data.AsSpan((offset + 2)..(offset + size));
             var packetId = span.At(0);
+
+            _log.Debug($"TX {(PacketId)packetId}");
 
             // The `SendBytes` event is only triggered for non-module packets.
             var handler = _onSendPacketHandlers[packetId] ?? OnSendPacket<UnknownPacket>;
