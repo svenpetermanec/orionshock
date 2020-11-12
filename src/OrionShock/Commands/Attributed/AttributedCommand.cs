@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 
 namespace OrionShock.Commands.Attributed {
-
     internal sealed class AttributedCommand : ICommand {
         private readonly ISet<string> _flags = new HashSet<string>();
         private readonly MethodInfo _handler;
@@ -14,6 +13,15 @@ namespace OrionShock.Commands.Attributed {
         private readonly ISet<string> _options = new HashSet<string>();
         private readonly Parsers _parsers;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AttributedCommand"/> class.
+        /// </summary>
+        /// <param name="parsers">The parsers used to parse this command's parameters.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="allowConsole">A value indicating whether the console can execute this command.</param>
+        /// <param name="handler">The handler method.</param>
+        /// <param name="handlerObject">The handler object.</param>
         public AttributedCommand(Parsers parsers, string name, string description, bool allowConsole, MethodInfo handler,
             object handlerObject = null) {
             _handler = handler ?? throw new ArgumentNullException(nameof(handler));
@@ -28,8 +36,7 @@ namespace OrionShock.Commands.Attributed {
                     continue;
                 }
 
-                AddOptionalParameter(parameter.ParameterType == typeof(bool) ? _flags : _options, optionAttribute,
-                    parameter.Name);
+                AddOptionalParameter(parameter.ParameterType == typeof(bool) ? _flags : _options, optionAttribute, parameter.Name);
             }
 
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -103,8 +110,8 @@ namespace OrionShock.Commands.Attributed {
                     }
                 }
                 else {
-                    var optionValue = inputMetadata.Options.GetValueOrDefault(optionAttribute.LongName,
-                        inputMetadata.Options.GetValueOrDefault(optionAttribute.ShortIdentifier.ToString()));
+                    var optionValue = inputMetadata.Options.GetValueOrDefault(
+                        optionAttribute.LongName, inputMetadata.Options.GetValueOrDefault(optionAttribute.ShortIdentifier.ToString()));
                     arguments[i] = optionValue == default
                         ? parameter.ParameterType.GetDefaultValue()
                         : parser(optionValue);

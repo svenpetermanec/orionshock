@@ -18,8 +18,12 @@ namespace OrionShock.Commands.Attributed {
         private readonly ISet<ICommand> _commands = new HashSet<ICommand>();
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AttributedCommandService"/> class.
+        /// </summary>
+        /// <param name="logger">The logger instance.</param>
         public AttributedCommandService(ILogger logger) {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <inheritdoc />
