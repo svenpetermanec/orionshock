@@ -1,6 +1,4 @@
 ﻿using JetBrains.Annotations;
-using Microsoft.VisualBasic.CompilerServices;
-using Orion.Core.Utils;
 
 namespace OrionShock.Commands {
     /// <summary>

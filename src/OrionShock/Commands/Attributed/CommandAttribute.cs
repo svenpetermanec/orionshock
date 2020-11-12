@@ -1,13 +1,15 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using System;
 
 namespace OrionShock.Commands.Attributed {
+
     /// <summary>
     ///     Describes a command.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     [PublicAPI]
     public class CommandAttribute : Attribute {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="CommandAttribute" /> class with the specified name and description.
         /// </summary>

@@ -5,16 +5,60 @@ using Orion.Core.Players;
 using Orion.Core.Utils;
 
 namespace OrionShock.Commands {
+    /// <summary>
+    /// Provides extension methods for the <see cref="PlayerCommandSender"/> type.
+    /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Readability.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name", Justification = "Code is reorganized by StyleCop.")]
+    public static class PlayerCommandSenderExtensions {
+        /// <summary>
+        /// Sends an error message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        public static void SendErrorMessage(this PlayerCommandSender sender, string message) =>
+            sender.SendMessage(message, new Color3(255, 0, 0));
+
+        /// <summary>
+        /// Sends an info message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        public static void SendInfoMessage(this PlayerCommandSender sender, string message) =>
+            sender.SendMessage(message, new Color3(255, 255, 0));
+
+        /// <summary>
+        /// Sends a success message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        public static void SendSuccessMessage(this PlayerCommandSender sender, string message) =>
+            sender.SendMessage(message, new Color3(0, 255, 0));
+    }
+
+    /// <summary>
+    /// Represents a player command sender.
+    /// </summary>
     [PublicAPI]
     public sealed class PlayerCommandSender : ICommandSender {
         private readonly IPlayer _player;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayerCommandSender"/> class.
+        /// </summary>
+        /// <param name="player">The player.</param>
         internal PlayerCommandSender(IPlayer player) {
             _player = player ?? throw new ArgumentNullException(nameof(player));
         }
 
+        /// <inheritdoc/>
         public void SendMessage(string message) => SendMessage(message, Color3.White);
 
+        /// <summary>
+        /// Sends a message in the specified color.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="color3">The color.</param>
         public void SendMessage([NotNull] string message, Color3 color3) {
             if (message is null) {
                 throw new ArgumentNullException(nameof(message));
@@ -22,16 +66,5 @@ namespace OrionShock.Commands {
 
             _player.SendMessage(new NetworkText(NetworkTextMode.Literal, message), color3);
         }
-    }
-
-    public static class PlayerCommandSenderExtensions {
-        public static void SendErrorMessage(this PlayerCommandSender sender, string message) =>
-            sender.SendMessage(message, new Color3(255, 0, 0));
-
-        public static void SendInfoMessage(this PlayerCommandSender sender, string message) =>
-            sender.SendMessage(message, new Color3(255, 255, 0));
-
-        public static void SendSuccessMessage(this PlayerCommandSender sender, string message) =>
-            sender.SendMessage(message, new Color3(0, 255, 0));
     }
 }

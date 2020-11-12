@@ -11,8 +11,10 @@ namespace OrionShock.Configuration {
     [Binding("JSON Configuration Service", Author = "ivanbiljan", Priority = BindingPriority.Normal)]
     internal sealed class JsonConfigurationService<TConfiguration> : IConfigurationService<TConfiguration>
         where TConfiguration : new() {
+        /// <inheritdoc/>
         public TConfiguration Configuration { get; private set; } = new TConfiguration();
 
+        /// <inheritdoc/>
         public void Read(string path) {
             if (File.Exists(path)) {
                 Configuration = JsonConvert.DeserializeObject<TConfiguration>(File.ReadAllText(path));
@@ -23,6 +25,7 @@ namespace OrionShock.Configuration {
             Write(path);
         }
 
+        /// <inheritdoc/>
         public void Write(string path) =>
             File.WriteAllText(path, JsonConvert.SerializeObject(Configuration, Formatting.Indented));
     }

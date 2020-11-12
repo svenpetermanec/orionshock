@@ -18,13 +18,13 @@ namespace OrionShock.Commands {
         }
 
         /// <summary>
-        ///     Gets the sender.
-        /// </summary>
-        public ICommandSender Sender { get; }
-
-        /// <summary>
         ///     Gets the full command-line representation of the command.
         /// </summary>
         public string CommandLine { get; }
+
+        /// <summary>
+        ///     Gets the sender.
+        /// </summary>
+        public ICommandSender Sender { get; }
     }
 }

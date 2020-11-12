@@ -1,11 +1,12 @@
-﻿using System;
+﻿using OrionShock.Exceptions;
+using OrionShock.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using OrionShock.Exceptions;
-using OrionShock.Extensions;
 
 namespace OrionShock.Commands.Attributed {
+
     internal sealed class AttributedCommand : ICommand {
         private readonly ISet<string> _flags = new HashSet<string>();
         private readonly MethodInfo _handler;
@@ -57,10 +58,9 @@ namespace OrionShock.Commands.Attributed {
         /// <inheritdoc />
         public string Name { get; }
 
-
         /// <inheritdoc />
         public void Execute(CommandContext context) {
-            var commandInputMetadata = CommandInputMetadata.Parse(context.CommandLine, new[] {Name});
+            var commandInputMetadata = CommandInputMetadata.Parse(context.CommandLine, new[] { Name });
             var args = BindParameters(context.Sender, commandInputMetadata);
             try {
                 _handler.Invoke(_handler.IsStatic ? null : _handlerObject, args);
@@ -86,14 +86,14 @@ namespace OrionShock.Commands.Attributed {
                 if (parser is null) {
                     throw new MissingParserException(parameter.ParameterType.Name);
                 }
-                
+
                 var optionAttribute = parameter.GetCustomAttribute<OptionAttribute>();
                 if (optionAttribute is null) {
                     if (!parameter.IsOptional) {
                         if (requiredArgumentIndex >= inputMetadata.RequiredArguments.Count) {
                             throw new ArgumentMismatchException("Insufficient number of arguments.");
                         }
-                        
+
                         arguments[i] = parser(inputMetadata.RequiredArguments[requiredArgumentIndex++]);
                     }
                     else {
@@ -113,6 +113,7 @@ namespace OrionShock.Commands.Attributed {
 
             return arguments;
         }
+
         // public void Test(ICommandSender sender, [Option("name")] string option, bool flag, [Option("num")] int number, float required, bool flag2 = false)
     }
 }
