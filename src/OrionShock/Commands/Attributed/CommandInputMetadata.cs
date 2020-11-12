@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace OrionShock.Commands.Attributed {
+
     /// <summary>
     ///     Represents a command input analyzer. This class lexes an input string to extract meaningful information.
     /// </summary>
@@ -12,7 +13,7 @@ namespace OrionShock.Commands.Attributed {
         // Generic command syntax: commandname requiredArg1 requiredArg2 "required arg 3" [options/flags]
         // This library originally followed a "Unix convention" where the general syntax is command name [options] args...
         // However, given that there is no context on the command we're parsing such approach makes option parsing
-        // too cumbersome as there is no way to tell whether the last option in the list takes an argument or if the 
+        // too cumbersome as there is no way to tell whether the last option in the list takes an argument or if the
         // following token represents one of the required arguments
         // E.g testcommand --booleanflag --option EitherOptionValueOrRequiredArgument requiredArg requiredArg2
 
@@ -70,7 +71,7 @@ namespace OrionShock.Commands.Attributed {
         private static string ParseCommandName(IReadOnlyCollection<string> availableCommandNames,
             IReadOnlyList<string> tokens, ref int index) {
             Debug.Assert(tokens.Count > 0);
-            
+
             var commandName = default(string);
             var i = 1;
             var builder = new StringBuilder(tokens[0]);
@@ -89,7 +90,7 @@ namespace OrionShock.Commands.Attributed {
                 if (!availableCommandNames.Contains(tempCommand)) {
                     break;
                 }
-                
+
                 commandName = tempCommand;
                 index = i;
                 builder.Append(" " + tokens.ElementAtOrDefault(i));
@@ -155,39 +156,40 @@ namespace OrionShock.Commands.Attributed {
 
                         isEscaped = true;
                         break;
+
                     case ' ':
                     case '\t':
                     case '\n': {
-                        if (inQuotes || isEscaped) {
-                            stringBuilder.Append(currentCharacter);
-                            isEscaped = false;
+                            if (inQuotes || isEscaped) {
+                                stringBuilder.Append(currentCharacter);
+                                isEscaped = false;
+                            }
+                            else {
+                                if (stringBuilder.Length == 0) {
+                                    continue;
+                                }
+
+                                CommitPendingArgument();
+                            }
+
+                            break;
                         }
-                        else {
-                            if (stringBuilder.Length == 0) {
+
+                    case '"': {
+                            if (isEscaped) {
+                                stringBuilder.Append(currentCharacter);
+                                isEscaped = false;
+                                continue;
+                            }
+
+                            inQuotes = !inQuotes;
+                            if (inQuotes) {
                                 continue;
                             }
 
                             CommitPendingArgument();
+                            break;
                         }
-
-                        break;
-                    }
-
-                    case '"': {
-                        if (isEscaped) {
-                            stringBuilder.Append(currentCharacter);
-                            isEscaped = false;
-                            continue;
-                        }
-
-                        inQuotes = !inQuotes;
-                        if (inQuotes) {
-                            continue;
-                        }
-
-                        CommitPendingArgument();
-                        break;
-                    }
 
                     default:
                         stringBuilder.Append(currentCharacter);

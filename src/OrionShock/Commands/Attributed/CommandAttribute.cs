@@ -9,7 +9,6 @@ namespace OrionShock.Commands.Attributed {
     [AttributeUsage(AttributeTargets.Method)]
     [PublicAPI]
     public class CommandAttribute : Attribute {
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="CommandAttribute" /> class with the specified name and description.
         /// </summary>
@@ -31,12 +30,6 @@ namespace OrionShock.Commands.Attributed {
             Name = name;
             Description = description;
         }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether the console should be prevented from executing this command. Defaults to
-        ///     <see langword="true" />.
-        /// </summary>
-        public bool AllowConsole { get; set; } = true;
 
         /// <summary>
         ///     Gets the description.

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using OrionShock.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace OrionShock.Commands.Attributed {
+
     /// <summary>
     ///     Represents a collection of parsers. This class is a singleton.
     /// </summary>

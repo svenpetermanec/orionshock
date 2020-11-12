@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace OrionShock.Commands.Attributed {
+
     internal sealed class AttributedCommand : ICommand {
         private readonly ISet<string> _flags = new HashSet<string>();
         private readonly MethodInfo _handler;

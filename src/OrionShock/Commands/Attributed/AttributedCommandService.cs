@@ -1,17 +1,16 @@
-﻿using JetBrains.Annotations;
-using Orion.Core;
-using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
+using Orion.Core;
+using Serilog;
 
 namespace OrionShock.Commands.Attributed {
 
     [Binding("AttributedCommands", Author = "ivanbiljan", Priority = BindingPriority.Normal)]
     [UsedImplicitly]
     internal sealed class AttributedCommandService : ICommandService {
-
         private const BindingFlags CommandHandlerBindingFlags =
             BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
 
@@ -50,8 +49,9 @@ namespace OrionShock.Commands.Attributed {
                     continue;
                 }
 
-                var command = new AttributedCommand(Parsers.Instance, commandAttribute.Name, commandAttribute.Description,
-                    commandAttribute.AllowConsole, handlerMethod, obj);
+                var isConsoleAllowed = handlerMethod.GetCustomAttribute<DisallowConsoleAttribute>() is null;
+                var command = new AttributedCommand(Parsers.Instance, commandAttribute.Name, commandAttribute.Description, 
+                    isConsoleAllowed, handlerMethod, obj);
                 _commands.Add(command);
             }
         }
