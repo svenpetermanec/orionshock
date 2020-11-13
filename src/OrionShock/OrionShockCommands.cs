@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Orion.Core;
 using Orion.Core.Packets.DataStructures;
 using Orion.Core.Packets.Npcs;
@@ -9,6 +7,8 @@ using Orion.Core.Players;
 using Orion.Core.Utils;
 using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
+using System;
+using System.Linq;
 
 namespace OrionShock {
 
@@ -16,7 +16,7 @@ namespace OrionShock {
         private readonly IServer _server;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrionShockCommands"/> class.
+        ///     Initializes a new instance of the <see cref="OrionShockCommands"/> class.
         /// </summary>
         /// <param name="server">The server instance.</param>
         public OrionShockCommands([NotNull] IServer server) {
@@ -44,7 +44,7 @@ namespace OrionShock {
         [Command("time", "Sets the world time.")]
         [UsedImplicitly]
         private void SetTime(int hours, int minutes) {
-            var time = (hours % 24) + (minutes / 60.0m) - 4.50m;
+            var time = hours % 24 + minutes / 60.0m - 4.50m;
             if (time < 0.00m) {
                 time += 24.00m;
             }

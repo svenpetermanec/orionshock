@@ -42,6 +42,7 @@ namespace OrionShock.Commands.Attributed {
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <param name="availableCommandNames">A readonly collection of available command names.</param>
+        /// <returns>The metadata.</returns>
         public static CommandInputMetadata Parse(string input, IReadOnlyCollection<string> availableCommandNames) {
             if (string.IsNullOrWhiteSpace(input)) {
                 throw new ArgumentException(nameof(input));
@@ -68,23 +69,13 @@ namespace OrionShock.Commands.Attributed {
             return arguments;
         }
 
-        private static string ParseCommandName(IReadOnlyCollection<string> availableCommandNames,
-            IReadOnlyList<string> tokens, ref int index) {
-            Debug.Assert(tokens.Count > 0);
+        private static string ParseCommandName(
+            IReadOnlyCollection<string> availableCommandNames, IReadOnlyList<string> tokens, ref int index) {
+            Debug.Assert(tokens.Count > 0, "tokens > 0");
 
             var commandName = default(string);
             var i = 1;
             var builder = new StringBuilder(tokens[0]);
-            // for (var i = 1; i < tokens.Count; ++i) {
-            //     var tempCommand = builder.ToString();
-            //     if (!availableCommandNames.Contains(tempCommand)) {
-            //         break;
-            //     }
-            //
-            //     commandName = tempCommand;
-            //     index = i;
-            //     builder.Append(" " + tokens[i]);
-            //}
             do {
                 var tempCommand = builder.ToString();
                 if (!availableCommandNames.Contains(tempCommand)) {
@@ -99,8 +90,8 @@ namespace OrionShock.Commands.Attributed {
             return commandName;
         }
 
-        private static Dictionary<string, string> ParseOptionals(IReadOnlyList<string> tokens,
-            ref int index) {
+        private static Dictionary<string, string> ParseOptionals(
+            IReadOnlyList<string> tokens, ref int index) {
             var currentOption = default(string);
             var options = new Dictionary<string, string>();
             for (var i = index; i < tokens.Count; ++i) {
