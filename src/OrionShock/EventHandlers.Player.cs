@@ -11,16 +11,7 @@ using OrionShock.Configuration;
 
 namespace OrionShock {
     internal sealed partial class EventHandlers {
-        private readonly ICommandService _commandService;
-        private readonly IConfigurationService<OrionShockConfig> _configurationService;
-
-        public EventHandlers(IConfigurationService<OrionShockConfig> configurationService, ICommandService commandService) {
-            _configurationService =
-                configurationService ?? throw new ArgumentNullException(nameof(configurationService));
-            _commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
-        }
-        
-        [EventHandler("orionshock-playerchat", Priority = EventPriority.Normal)]
+        [EventHandler("orionshock-players", Priority = EventPriority.Normal)]
         public void HandlePlayerChat(PlayerChatEvent @event) {
             if (!@event.Command.Equals("say", StringComparison.InvariantCulture)) {
                 return;
@@ -40,8 +31,8 @@ namespace OrionShock {
                 var commands = _commandService.GetCommands().ToList();
                 var commandInput = CommandInputMetadata.Parse(message, commands.Select(c => c.Name).ToList());
                 if (string.IsNullOrWhiteSpace(commandInput.CommandName)) {
-                    @event.Player.SendMessage(new NetworkText(NetworkTextMode.Literal, "Invalid command input."),
-                        Color3.White);
+                    @event.Player.SendMessage(
+                        new NetworkText(NetworkTextMode.Literal, "Invalid command input."), Color3.White);
                     return;
                 }
             }

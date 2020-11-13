@@ -99,7 +99,7 @@ namespace OrionShock.Commands.Attributed {
                 if (optionAttribute is null) {
                     if (!parameter.IsOptional) {
                         if (requiredArgumentIndex >= inputMetadata.RequiredArguments.Count) {
-                            throw new ArgumentMismatchException("Insufficient number of arguments.");
+                            throw new CommandSyntaxException("Insufficient number of arguments.");
                         }
 
                         arguments[i] = parser(inputMetadata.RequiredArguments[requiredArgumentIndex++]);
