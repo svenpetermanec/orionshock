@@ -9,7 +9,7 @@ namespace OrionShock.Database {
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
     [Binding("Repository", Author = "ivanbiljan", Priority = BindingPriority.Highest)]
     public class RepositoryBase<T> : IRepository<T>
-        where T : class {
+        where T : DataModelBase {
         /// <inheritdoc/>
         public void Create([NotNull] T obj) {
             throw new NotImplementedException();
