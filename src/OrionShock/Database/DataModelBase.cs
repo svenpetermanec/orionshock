@@ -9,7 +9,7 @@ namespace OrionShock.Database {
     /// <summary>
     /// Represents a base class for a data model (i.e, a table).
     /// </summary>
-    public abstract class DataModel {
+    public abstract class DataModelBase {
         /// <summary>
         /// Gets the table name.
         /// </summary>

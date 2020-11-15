@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using System.Linq;
+using JetBrains.Annotations;
 using Orion.Core;
 using Orion.Core.Packets.DataStructures;
 using Orion.Core.Packets.Npcs;
@@ -7,8 +9,6 @@ using Orion.Core.Players;
 using Orion.Core.Utils;
 using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
-using System;
-using System.Linq;
 
 namespace OrionShock {
 

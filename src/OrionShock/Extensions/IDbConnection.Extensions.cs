@@ -36,7 +36,7 @@ namespace OrionShock.Extensions {
         /// <typeparam name="T">The type of entities this table stores, i.e the model used to interact with the table.</typeparam>
         /// <param name="connection">The database connection.</param>
         public static void CreateTable<T>(this IDbConnection connection)
-            where T : DataModel, new() {
+            where T : DataModelBase, new() {
             if (connection is null) {
                 throw new ArgumentNullException(nameof(connection));
             }
@@ -51,7 +51,7 @@ namespace OrionShock.Extensions {
             AppendColumn();
             while (columnDefinitionEnumerator.MoveNext()) {
                 Debug.Assert(columnDefinitionEnumerator.Current != null, "columnDefinitionEnumerator.Current != null");
-                tableBuilder.Append(",");
+                tableBuilder.Append(',');
                 AppendColumn();
             }
 

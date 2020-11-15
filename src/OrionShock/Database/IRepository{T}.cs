@@ -1,15 +1,17 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
+using Orion.Core;
 
 namespace OrionShock.Database {
     /// <summary>
     /// Describes a repository.
     /// </summary>
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
+    [Service(ServiceScope.Transient)]
     public interface IRepository<T>
         where T : class {
         /// <summary>
