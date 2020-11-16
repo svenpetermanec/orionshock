@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Database {
+namespace OrionShock.DataLayer {
     /// <summary>
     /// Marks the given property as a primary key in a table.
     /// </summary>

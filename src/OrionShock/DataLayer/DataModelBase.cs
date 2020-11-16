@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Database {
+namespace OrionShock.DataLayer {
     /// <summary>
     /// Represents a base class for a data model (i.e, a table).
     /// </summary>

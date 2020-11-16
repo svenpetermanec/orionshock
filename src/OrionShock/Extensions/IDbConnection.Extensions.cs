@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using OrionShock.Database;
+using OrionShock.DataLayer;
 
 namespace OrionShock.Extensions {
+    /// <summary>
     /// <summary>
     /// Provides extension methods for the <see cref="IDbConnection"/> type.
     /// </summary>

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Orion.Core;
 
-namespace OrionShock.Database {
+namespace OrionShock.DataLayer {
     /// <summary>
-    /// Describes a repository.
+    /// Describes a repository. <i>Repositories should implement <see cref="RepositoryBase{T}"/>!</i>
     /// </summary>
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
     [Service(ServiceScope.Transient)]

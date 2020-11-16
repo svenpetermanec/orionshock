@@ -150,9 +150,9 @@ namespace Orion.Launcher
                 {
                     foreach (var interfaceType in bindingType
                         .GetInterfaces()
-                        .Select(t => bindingType.IsGenericTypeDefinition && t.IsGenericType ? t.GetGenericTypeDefinition() : t)
+                        .Select(t => bindingType.IsGenericTypeDefinition && t.IsGenericType && t.ContainsGenericParameters ? t.GetGenericTypeDefinition() : t)
                         .Where(_serviceInterfaceTypes.Contains))
-                    {
+                    { 
                         if (!_serviceBindingTypes.TryGetValue(interfaceType, out var types))
                         {
                             types = new HashSet<Type>();

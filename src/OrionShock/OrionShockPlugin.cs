@@ -27,5 +27,5 @@ namespace OrionShock {
             // Register OrionShock commands
             commandService.Register(new OrionShockCommands(server));
         }
-    } 
+    }
 }

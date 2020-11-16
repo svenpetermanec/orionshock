@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Database {
+namespace OrionShock.DataLayer {
     /// <summary>
     /// Describes a column in a table.
     /// </summary>
