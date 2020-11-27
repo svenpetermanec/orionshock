@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,26 +22,36 @@ namespace OrionShock.DataLayer {
         }
 
         /// <summary>
-        /// Gets an iterator over column definitions inferred from properties annotated with the <see cref="ColumnAttribute"/>.
+        /// Returns an enumerable collection of column definitions inferred from properties annotated with the <see cref="ColumnAttribute"/>.
         /// </summary>
         /// <returns>An enumerable collection of column definitions.</returns>
         internal IEnumerable<ColumnDefinitionMetadata> GetColumns() {
             var type = GetType();
 
             // var isOptIn = type.GetCustomAttribute<TableAttribute>()?.SchemaCreationOption == SchemaCreationOptions.OptIn;
-            var properties = type.GetProperties();
-            for (var i = 0; i < properties.Length; ++i) {
-                var property = properties[i];
-                var columnAttribute = property.GetCustomAttribute<ColumnAttribute>();
+            var members = type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            for (var i = 0; i < members.Length; ++i) {
+                var member = members[i];
+                var columnAttribute = member.GetCustomAttribute<ColumnAttribute>();
                 if (columnAttribute is null) {
+                    continue;
+                }
+
+                Type columnType;
+                if (member is FieldInfo fieldInfo) {
+                    columnType = fieldInfo.FieldType;
+                }
+                else if (member is PropertyInfo propertyInfo) {
+                    columnType = propertyInfo.PropertyType;
+                } else {
                     continue;
                 }
 
                 yield return new ColumnDefinitionMetadata(
                     columnAttribute.Name,
                     columnAttribute.IsUnique,
-                    type.GetCustomAttribute<PrimaryKeyAttribute>() is not null,
-                    property.PropertyType);
+                    member.GetCustomAttribute<PrimaryKeyAttribute>() is not null,
+                    columnType);
             }
         }
     }

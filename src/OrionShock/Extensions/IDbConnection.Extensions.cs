@@ -49,6 +49,8 @@ namespace OrionShock.Extensions {
                 throw new InvalidOperationException($"Cannot create an empty table ('{model.TableName}').");
             }
 
+            var primaryKeys = new List<string>();
+
             AppendColumn();
             while (columnDefinitionEnumerator.MoveNext()) {
                 Debug.Assert(columnDefinitionEnumerator.Current != null, "columnDefinitionEnumerator.Current != null");
@@ -56,24 +58,29 @@ namespace OrionShock.Extensions {
                 AppendColumn();
             }
 
+            if (primaryKeys.Count > 0) {
+                tableBuilder.Append($", PRIMARY KEYS({string.Join(", ", primaryKeys)}");
+            }
+
             tableBuilder.Append(");");
             connection.Execute(tableBuilder.ToString());
 
             void AppendColumn() {
-                var sqliteType = NetToSqliteTypeMapping.GetValueOrDefault(columnDefinitionEnumerator.Current.DataType);
+                var column = columnDefinitionEnumerator.Current;
+                var sqliteType = NetToSqliteTypeMapping.GetValueOrDefault(column.DataType);
                 if (sqliteType == default) {
-                    throw new NotSupportedException($"No matching SQLite type found for '{columnDefinitionEnumerator.Current.DataType}'");
+                    throw new NotSupportedException($"No matching SQLite type found for '{column.DataType}'");
                 }
 
-                tableBuilder.Append($" {columnDefinitionEnumerator.Current.Name} {sqliteType}");
-                if (columnDefinitionEnumerator.Current.IsPrimaryKey) {
-                    tableBuilder.Append(" PRIMARY KEY NOT NULL");
+                tableBuilder.Append($" {column.Name} {sqliteType}");
+                if (column.IsPrimaryKey) {
+                    primaryKeys.Add(column.Name);
                 }
-                else if (!typeof(Nullable<>).IsAssignableFrom(columnDefinitionEnumerator.Current.DataType)) {
+                else if (!typeof(Nullable<>).IsAssignableFrom(column.DataType)) {
                     tableBuilder.Append(" NOT NULL");
                 }
 
-                if (columnDefinitionEnumerator.Current.IsUnique) {
+                if (column.IsUnique) {
                     tableBuilder.Append(" UNIQUE");
                 }
             }

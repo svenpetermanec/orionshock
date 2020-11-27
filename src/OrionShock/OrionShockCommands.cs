@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Orion.Core;
+using Orion.Core.Npcs;
 using Orion.Core.Packets.DataStructures;
 using Orion.Core.Packets.Npcs;
 using Orion.Core.Packets.World;
@@ -11,8 +14,9 @@ using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
 
 namespace OrionShock {
-
     internal sealed class OrionShockCommands {
+        private static readonly IDictionary<string, INpc> NpcCache = new Dictionary<string, INpc>();
+
         private readonly IServer _server;
 
         /// <summary>
@@ -60,6 +64,8 @@ namespace OrionShock {
                 worldInfo.Time = (int)(time * 3600.0m);
             }
 
+            Terraria.Main.dayTime = worldInfo.IsDayTime;
+            Terraria.Main.time = worldInfo.Time;
             playerService.BroadcastPacket(worldInfo);
             playerService.BroadcastMessage(
                 new NetworkText(

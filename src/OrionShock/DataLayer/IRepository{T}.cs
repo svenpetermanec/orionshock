@@ -12,8 +12,7 @@ namespace OrionShock.DataLayer {
     /// </summary>
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
     [Service(ServiceScope.Transient)]
-    public interface IRepository<T>
-        where T : DataModelBase {
+    public interface IRepository<T> {
         /// <summary>
         /// Inserts a given object into the database.
         /// </summary>

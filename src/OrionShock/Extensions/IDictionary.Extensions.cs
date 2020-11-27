@@ -20,8 +20,11 @@ namespace OrionShock.Extensions {
         ///     <paramref name="dictionary" /> or <paramref name="key" /> is
         ///     <see langword="null" />.
         /// </exception>
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary,
-            [NotNull] TKey key, TValue defaultValue = default) where TKey : notnull {
+        public static TValue GetValueOrDefault<TKey, TValue>(
+            [NotNull] this IDictionary<TKey, TValue> dictionary,
+            [NotNull] TKey key,
+            TValue defaultValue = default) 
+            where TKey : notnull {
             if (dictionary is null) {
                 throw new ArgumentNullException(nameof(dictionary));
             }

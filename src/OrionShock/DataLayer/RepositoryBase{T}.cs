@@ -11,15 +11,14 @@ namespace OrionShock.DataLayer {
     /// Provides a base class for a repository.
     /// </summary>
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
-    public abstract class RepositoryBase<T> : IRepository<T>
-        where T : DataModelBase {
+    public abstract class RepositoryBase<T> : IRepository<T> {
         private readonly IConfigurationService<OrionShockConfig> _configurationService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RepositoryBase{T}"/> class.
         /// </summary>
         /// <param name="configurationService">The configuration service instance.</param>
-        public RepositoryBase(IConfigurationService<OrionShockConfig> configurationService) {
+        protected RepositoryBase(IConfigurationService<OrionShockConfig> configurationService) {
             _configurationService = configurationService ?? throw new ArgumentNullException(nameof(configurationService));
         }
 
