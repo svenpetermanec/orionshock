@@ -9,6 +9,7 @@ using Orion.Core.Players;
 using Orion.Core.Utils;
 using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
+using OrionShock.Exceptions;
 
 namespace OrionShock {
     internal sealed partial class EventHandlers {
@@ -39,9 +40,8 @@ namespace OrionShock {
                 command.Execute(new CommandContext(new ConsoleCommandSender(), message));
                 @event.Cancel();
             }
-            catch (Exception e) {
-                Console.WriteLine(e);
-                throw;
+            catch (CommandSyntaxException e) {
+                Console.WriteLine(e.Message);
             }
         }
     }

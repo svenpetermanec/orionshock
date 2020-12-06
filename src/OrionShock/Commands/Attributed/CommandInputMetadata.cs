@@ -63,6 +63,10 @@ namespace OrionShock.Commands.Attributed {
         private static List<string> ParseArguments(IReadOnlyList<string> tokens, ref int index) {
             var arguments = new List<string>();
             for (; index < tokens.Count; ++index) {
+                if (tokens[index][0] == '-') {
+                    break;
+                }
+
                 arguments.Add(tokens[index]);
             }
 

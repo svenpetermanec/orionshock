@@ -41,15 +41,18 @@ namespace OrionShock.Commands {
     /// </summary>
     [PublicAPI]
     public sealed class PlayerCommandSender : ICommandSender {
-        private readonly IPlayer _player;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCommandSender"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
         internal PlayerCommandSender(IPlayer player) {
-            _player = player ?? throw new ArgumentNullException(nameof(player));
+            Player = player ?? throw new ArgumentNullException(nameof(player));
         }
+
+        /// <summary>
+        /// Gets the player.
+        /// </summary>
+        public IPlayer Player { get; }
 
         /// <inheritdoc/>
         public void SendMessage(string message) => SendMessage(message, Color3.White);
@@ -64,7 +67,7 @@ namespace OrionShock.Commands {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            _player.SendMessage(new NetworkText(NetworkTextMode.Literal, message), color3);
+            Player.SendMessage(new NetworkText(NetworkTextMode.Literal, message), color3);
         }
     }
 }

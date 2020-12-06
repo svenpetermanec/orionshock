@@ -7,6 +7,9 @@ using Orion.Core;
 using Serilog;
 
 namespace OrionShock.Commands.Attributed {
+    /// <summary>
+    /// Represents the attributed command service.
+    /// </summary>
 
     [Binding("AttributedCommands", Author = "ivanbiljan", Priority = BindingPriority.Normal)]
     [UsedImplicitly]
@@ -50,8 +53,13 @@ namespace OrionShock.Commands.Attributed {
                 }
 
                 var isConsoleAllowed = handlerMethod.GetCustomAttribute<DisallowConsoleAttribute>() is null;
-                var command = new AttributedCommand(Parsers.Instance, commandAttribute.Name, commandAttribute.Description, 
-                    isConsoleAllowed, handlerMethod, obj);
+                var command = new AttributedCommand(
+                    Parsers.Instance,
+                    commandAttribute.Name,
+                    commandAttribute.Description,
+                    isConsoleAllowed,
+                    handlerMethod,
+                    obj);
                 _commands.Add(command);
             }
         }

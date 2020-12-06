@@ -163,8 +163,10 @@ namespace Orion.Launcher.Players
             {
                 handler = _onReceivePacketHandlers[packetId] ?? OnReceivePacket<UnknownPacket>;
             }
-            
-            _log.Debug($"RX {(PacketId)packetId}");
+
+#if DEBUG
+            //_log.Debug($"RX {(PacketId)packetId}");
+#endif
 
             handler(buffer.whoAmI, span);
             return OTAPI.HookResult.Cancel;
@@ -182,7 +184,9 @@ namespace Orion.Launcher.Players
             var span = data.AsSpan((offset + 2)..(offset + size));
             var packetId = span.At(0);
 
-            _log.Debug($"TX {(PacketId)packetId}");
+#if DEBUG
+            //_log.Debug($"TX {(PacketId)packetId}");
+#endif
 
             // The `SendBytes` event is only triggered for non-module packets.
             var handler = _onSendPacketHandlers[packetId] ?? OnSendPacket<UnknownPacket>;

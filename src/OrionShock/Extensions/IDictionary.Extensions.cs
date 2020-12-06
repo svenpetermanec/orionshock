@@ -23,7 +23,7 @@ namespace OrionShock.Extensions {
         public static TValue GetValueOrDefault<TKey, TValue>(
             [NotNull] this IDictionary<TKey, TValue> dictionary,
             [NotNull] TKey key,
-            TValue defaultValue = default) 
+            TValue defaultValue = default)
             where TKey : notnull {
             if (dictionary is null) {
                 throw new ArgumentNullException(nameof(dictionary));
