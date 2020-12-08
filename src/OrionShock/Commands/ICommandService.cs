@@ -17,9 +17,9 @@ namespace OrionShock.Commands {
         void Deregister([NotNull] object obj);
 
         /// <summary>
-        /// Gets the command that best matches the given name.
+        ///     Gets the command that best matches the given name.
         /// </summary>
-        /// <param name="name">The name, which must not be <see langword="null"/>.</param>
+        /// <param name="name">The name, which must not be <see langword="null" />.</param>
         /// <returns>The command that best matches the given name.</returns>
         [CanBeNull]
         ICommand GetCommand([NotNull] string name);

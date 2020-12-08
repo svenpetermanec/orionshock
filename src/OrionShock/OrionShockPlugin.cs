@@ -13,13 +13,17 @@ namespace OrionShock {
     [UsedImplicitly]
     public sealed class OrionShockPlugin : OrionPlugin {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrionShockPlugin"/> class.
+        ///     Initializes a new instance of the <see cref="OrionShockPlugin" /> class.
         /// </summary>
         /// <param name="server">The server instance.</param>
         /// <param name="log">The logger instance-</param>
         /// <param name="configurationService">The configuration service instance.</param>
         /// <param name="commandService">The command service instance.</param>
-        public OrionShockPlugin(IServer server, ILogger log, IConfigurationService<OrionShockConfig> configurationService, ICommandService commandService)
+        public OrionShockPlugin(
+            IServer server,
+            ILogger log,
+            IConfigurationService<OrionShockConfig> configurationService,
+            ICommandService commandService)
             : base(server, log) {
             // Set up event handlers
             server.Events.RegisterHandlers(new EventHandlers(configurationService, commandService), log);

@@ -7,8 +7,7 @@ namespace OrionShock.Configuration {
     /// <typeparam name="TConfiguration">The type of configuration.</typeparam>
     [Service(ServiceScope.Transient)]
     public interface IConfigurationService<out TConfiguration>
-        where TConfiguration : new()
-    {
+        where TConfiguration : new() {
         /// <summary>
         ///     Gets the underlying configuration file.
         /// </summary>

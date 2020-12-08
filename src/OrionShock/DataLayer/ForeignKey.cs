@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrionShock.DataLayer {
     /// <summary>
-    /// Represents a foreign key in a table.
+    ///     Represents a foreign key in a table.
     /// </summary>
     internal sealed class ForeignKey {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ForeignKey"/> class.
+        ///     Initializes a new instance of the <see cref="ForeignKey" /> class.
         /// </summary>
         /// <param name="columns">The columns that comprise the foreign key.</param>
         /// <param name="referencedTable">The referenced table.</param>
@@ -23,17 +19,17 @@ namespace OrionShock.DataLayer {
         }
 
         /// <summary>
-        /// Gets an immutable array of columns that comprise the foreign key.
+        ///     Gets an immutable array of columns that comprise the foreign key.
         /// </summary>
         public ImmutableArray<string> Columns { get; }
 
         /// <summary>
-        /// Gets the referenced table.
+        ///     Gets the referenced table.
         /// </summary>
         public string ReferencedTable { get; }
 
         /// <summary>
-        /// Gets an immutable array of columns that comprise the foreign key.
+        ///     Gets an immutable array of columns that comprise the foreign key.
         /// </summary>
         public ImmutableArray<string> ReferencedColumns { get; }
     }

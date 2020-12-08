@@ -6,7 +6,7 @@ namespace OrionShock.Warps {
         private readonly IRepository<IWarp> _warpRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrionShockWarpService"/> class.
+        ///     Initializes a new instance of the <see cref="OrionShockWarpService" /> class.
         /// </summary>
         /// <param name="warpRepository">The warp repository instance.</param>
         public OrionShockWarpService(IRepository<IWarp> warpRepository) {
@@ -14,12 +14,12 @@ namespace OrionShock.Warps {
         }
 
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public void CreateWarp(IWarp warp) {
             _warpRepository.Create(warp);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public void RemoveWarp(IWarp warp) {
             _warpRepository.Delete(warp);
         }

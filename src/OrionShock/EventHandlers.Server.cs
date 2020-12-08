@@ -2,11 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Orion.Core.Events;
-using Orion.Core.Events.Players;
 using Orion.Core.Events.Server;
-using Orion.Core.Packets.DataStructures;
-using Orion.Core.Players;
-using Orion.Core.Utils;
 using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
 using OrionShock.Exceptions;

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrionShock.DataLayer {
     /// <summary>
-    /// Marks the given property as a primary key in a table.
+    ///     Marks the given property as a primary key in a table.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class PrimaryKeyAttribute : Attribute {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PrimaryKeyAttribute"/> class.
+        ///     Initializes a new instance of the <see cref="PrimaryKeyAttribute" /> class.
         /// </summary>
         /// <param name="name">The name.</param>
         public PrimaryKeyAttribute(string name) {
@@ -19,7 +15,7 @@ namespace OrionShock.DataLayer {
         }
 
         /// <summary>
-        /// Gets the name.
+        ///     Gets the name.
         /// </summary>
         public string Name { get; }
     }

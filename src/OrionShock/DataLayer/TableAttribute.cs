@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrionShock.DataLayer {
     /// <summary>
-    /// Describes a table in a database.
+    ///     Describes a table in a database.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class TableAttribute : Attribute {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableAttribute"/> class.
+        ///     Initializes a new instance of the <see cref="TableAttribute" /> class.
         /// </summary>
         /// <param name="name">The name of the table.</param>
         public TableAttribute(string name) {
@@ -19,7 +15,7 @@ namespace OrionShock.DataLayer {
         }
 
         /// <summary>
-        /// Gets the table's name.
+        ///     Gets the table's name.
         /// </summary>
         public string Name { get; }
     }

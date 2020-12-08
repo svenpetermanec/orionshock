@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace OrionShock.Extensions {
     /// <summary>
-    /// Provides extension methods for the <see cref="string"/> type.
+    ///     Provides extension methods for the <see cref="string" /> type.
     /// </summary>
     internal static class StringExtensions {
         /// <summary>
-        /// Splits a <c>camelCase</c> or <c>PascalCase</c> string into a space separated string.
+        ///     Splits a <c>camelCase</c> or <c>PascalCase</c> string into a space separated string.
         /// </summary>
         /// <param name="source">The input string.</param>
         /// <returns>A space separated string.</returns>

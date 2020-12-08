@@ -1,15 +1,13 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace OrionShock.Commands.Attributed {
-
     /// <summary>
     ///     Describes a command option.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     [PublicAPI]
     public sealed class OptionAttribute : Attribute {
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="OptionAttribute" /> with the specified name.
         /// </summary>

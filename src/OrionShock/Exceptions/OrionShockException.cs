@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace OrionShock.Exceptions {
     /// <summary>
-    /// Represents an OrionShock exception.
+    ///     Represents an OrionShock exception.
     /// </summary>
     public class OrionShockException : Exception {
         /// <inheritdoc />
@@ -11,7 +11,8 @@ namespace OrionShock.Exceptions {
         }
 
         /// <inheritdoc />
-        public OrionShockException([CanBeNull] string message, [CanBeNull] Exception innerException) : base(message, innerException) {
+        public OrionShockException([CanBeNull] string message, [CanBeNull] Exception innerException) : base(message,
+            innerException) {
         }
     }
 }

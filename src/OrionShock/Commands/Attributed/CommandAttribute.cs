@@ -1,8 +1,7 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace OrionShock.Commands.Attributed {
-
     /// <summary>
     ///     Describes a command.
     /// </summary>

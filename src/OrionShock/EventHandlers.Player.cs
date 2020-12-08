@@ -5,9 +5,7 @@ using Orion.Core.Events.Players;
 using Orion.Core.Packets.DataStructures;
 using Orion.Core.Players;
 using Orion.Core.Utils;
-using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
-using OrionShock.Configuration;
 
 namespace OrionShock {
     internal sealed partial class EventHandlers {
@@ -33,7 +31,6 @@ namespace OrionShock {
                 if (string.IsNullOrWhiteSpace(commandInput.CommandName)) {
                     @event.Player.SendMessage(
                         new NetworkText(NetworkTextMode.Literal, "Invalid command input."), Color3.White);
-                    return;
                 }
             }
             catch (Exception e) {

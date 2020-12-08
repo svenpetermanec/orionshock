@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 using OrionShock.DataLayer;
 
 namespace OrionShock.Extensions {
     /// <summary>
-    /// <summary>
-    /// Provides extension methods for the <see cref="IDbConnection"/> type.
-    /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name", Justification = "Personal style")]
+    ///     <summary>
+    ///         Provides extension methods for the <see cref="IDbConnection" /> type.
+    ///     </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name",
+        Justification = "Personal style")]
     public static class IDbConnectionExtensions {
         private static readonly IDictionary<Type, string> NetToSqliteTypeMapping = new Dictionary<Type, string> {
             [typeof(bool)] = "INTEGER",
@@ -32,7 +32,7 @@ namespace OrionShock.Extensions {
         };
 
         /// <summary>
-        /// Creates a table that stores entities of type <typeparamref name="T"/>.
+        ///     Creates a table that stores entities of type <typeparamref name="T" />.
         /// </summary>
         /// <typeparam name="T">The type of entities this table stores, i.e the model used to interact with the table.</typeparam>
         /// <param name="connection">The database connection.</param>

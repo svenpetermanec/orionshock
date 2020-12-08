@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Orion.Core;
@@ -14,17 +13,18 @@ using Orion.Core.Utils;
 using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
 using OrionShock.Extensions;
+using Terraria;
 
 namespace OrionShock {
     /// <summary>
-    /// Defines methods that represent commands handlers.
+    ///     Defines methods that represent commands handlers.
     /// </summary>
     internal sealed class OrionShockCommands {
         private readonly IDictionary<string, NpcId> _npcLookup = new ConcurrentDictionary<string, NpcId>();
         private readonly IServer _server;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="OrionShockCommands"/> class.
+        ///     Initializes a new instance of the <see cref="OrionShockCommands" /> class.
         /// </summary>
         /// <param name="server">The server instance.</param>
         public OrionShockCommands([NotNull] IServer server) {
@@ -42,9 +42,10 @@ namespace OrionShock {
             var playerService = _server.Players;
             var npcInfoPacket = new NpcInfo();
 
-            foreach (var npc in npcService.Where(n => n != null && n.IsActive && n.Health > 0 && !Terraria.Main.npc[n.Index].friendly && !Terraria.Main.npc[n.Index].townNPC)) {
+            foreach (var npc in npcService.Where(n =>
+                n != null && n.IsActive && n.Health > 0 && !Main.npc[n.Index].friendly && !Main.npc[n.Index].townNPC)) {
                 npc.IsActive = false;
-                npcInfoPacket.NpcIndex = (short)npc.Index;
+                npcInfoPacket.NpcIndex = (short) npc.Index;
                 playerService.BroadcastPacket(npcInfoPacket);
                 ++npcCount;
             }
@@ -64,25 +65,32 @@ namespace OrionShock {
             var worldTime = default(WorldTime);
             if (time >= 15.00m) {
                 worldTime.IsDayTime = false;
-                worldTime.Time = (int)((time - 15.00m) * 3600.0m);
+                worldTime.Time = (int) ((time - 15.00m) * 3600.0m);
             }
             else {
                 worldTime.IsDayTime = true;
-                worldTime.Time = (int)(time * 3600.0m);
+                worldTime.Time = (int) (time * 3600.0m);
             }
 
-            Terraria.Main.dayTime = worldTime.IsDayTime;
-            Terraria.Main.time = worldTime.Time;
+            Main.dayTime = worldTime.IsDayTime;
+            Main.time = worldTime.Time;
             playerService.BroadcastPacket(worldTime);
             playerService.BroadcastMessage(
                 new NetworkText(
-                    NetworkTextMode.Literal, $"Time has been set to {hours % 24 + minutes / 60:D2}:{minutes % 60:D2}"), new Color3(255, 255, 0));
+                    NetworkTextMode.Literal, $"Time has been set to {hours % 24 + minutes / 60:D2}:{minutes % 60:D2}"),
+                new Color3(255, 255, 0));
         }
 
         [Command("spawnnpc", "Spawns an NPC with the given ID or name.")]
-        private void SpawnNpc(ICommandSender sender, NpcId npcId, [Option("x")] int x, [Option("y")] int y, [Option("amount")] int amount) {
+        private void SpawnNpc(
+            ICommandSender sender,
+            NpcId npcId,
+            [Option("x")] int x,
+            [Option("y")] int y,
+            [Option("amount")] int amount) {
             if ((x <= 0 || y <= 0) && sender is ConsoleCommandSender) {
-                sender.SendMessage("You must provide coordinates when spawning mobs via console: spawnmob <npc ID or name> -x <tile x> -y <tile y>");
+                sender.SendMessage(
+                    "You must provide coordinates when spawning mobs via console: spawnmob <npc ID or name> -x <tile x> -y <tile y>");
                 return;
             }
 
@@ -92,8 +100,8 @@ namespace OrionShock {
             }
 
             var playerSender = sender as PlayerCommandSender;
-            x = x <= 0 ? (int)playerSender.Player.Position.X / 16 : x;
-            y = y <= 0 ? (int)playerSender.Player.Position.Y / 16 : y;
+            x = x <= 0 ? (int) playerSender.Player.Position.X / 16 : x;
+            y = y <= 0 ? (int) playerSender.Player.Position.Y / 16 : y;
             amount = Math.Max(1, amount);
 
             for (var i = 0; i < amount; ++i) {
@@ -104,10 +112,10 @@ namespace OrionShock {
         }
 
         private void InitializeLookups() {
-            Terraria.NPC npc = new Terraria.NPC();
-            for (var i = -17; i < Terraria.Main.maxNPCTypes; ++i) {
+            var npc = new NPC();
+            for (var i = -17; i < Main.maxNPCTypes; ++i) {
                 npc.SetDefaults(i);
-                _npcLookup[Terraria.Lang.GetNPCNameValue(i)] = (NpcId)i;
+                _npcLookup[Lang.GetNPCNameValue(i)] = (NpcId) i;
             }
         }
 
@@ -116,8 +124,8 @@ namespace OrionShock {
                 throw new ArgumentException(nameof(input));
             }
 
-            if (int.TryParse(input, out var npcId) && npcId > 0 && npcId < Terraria.Main.maxNPCTypes) {
-                return (NpcId)npcId;
+            if (int.TryParse(input, out var npcId) && npcId > 0 && npcId < Main.maxNPCTypes) {
+                return (NpcId) npcId;
             }
 
             var matches = new List<NpcId>();

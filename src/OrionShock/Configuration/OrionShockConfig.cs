@@ -20,27 +20,27 @@ namespace OrionShock.Configuration {
         public string CommandSpecifier { get; set; } = "/";
 
         /// <summary>
-        /// Gets a dictionary of connection strings.
+        ///     Gets a dictionary of connection strings.
         /// </summary>
         public IDictionary<string, string> ConnectionStrings { get; } = new Dictionary<string, string> {
             ["Default"] = string.Empty
         };
 
         /// <summary>
-        /// Gets a connection string stored under the specified name, or <see langword="null"/> if no such connection exists.
+        ///     Gets a connection string stored under the specified name, or <see langword="null" /> if no such connection exists.
         /// </summary>
         /// <param name="name">The name the connection is stored under.</param>
-        /// <returns>The connection string, or <see langword="null"/> if no such connection exists.</returns>
+        /// <returns>The connection string, or <see langword="null" /> if no such connection exists.</returns>
         public string GetConnectionString(string name) {
             if (string.IsNullOrWhiteSpace(name)) {
-                throw new ArgumentException(nameof(name));
+                throw new ArgumentException("Invalid connection string name.", nameof(name));
             }
 
             return _connectionStrings.GetValueOrDefault(name);
         }
 
         /// <summary>
-        /// Stores a connection string under the specified name.
+        ///     Stores a connection string under the specified name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="connectionString">The connection string.</param>

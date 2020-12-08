@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrionShock.DataLayer {
     /// <summary>
-    /// Represents a base class for a data model (i.e, a table).
+    ///     Represents a base class for a data model (i.e, a table).
     /// </summary>
     public abstract class DataModelBase {
         /// <summary>
-        /// Gets the table name.
+        ///     Gets the table name.
         /// </summary>
         internal string TableName {
             get {
@@ -22,7 +18,8 @@ namespace OrionShock.DataLayer {
         }
 
         /// <summary>
-        /// Returns an enumerable collection of column definitions inferred from properties annotated with the <see cref="ColumnAttribute"/>.
+        ///     Returns an enumerable collection of column definitions inferred from properties annotated with the
+        ///     <see cref="ColumnAttribute" />.
         /// </summary>
         /// <returns>An enumerable collection of column definitions.</returns>
         internal IEnumerable<ColumnDefinitionMetadata> GetColumns() {
@@ -43,7 +40,8 @@ namespace OrionShock.DataLayer {
                 }
                 else if (member is PropertyInfo propertyInfo) {
                     columnType = propertyInfo.PropertyType;
-                } else {
+                }
+                else {
                     continue;
                 }
 

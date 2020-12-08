@@ -4,24 +4,24 @@ using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using Orion.Core;
+using OrionShock.Extensions;
 using Serilog;
 
 namespace OrionShock.Commands.Attributed {
     /// <summary>
-    /// Represents the attributed command service.
+    ///     Represents the attributed command service.
     /// </summary>
-
     [Binding("AttributedCommands", Author = "ivanbiljan", Priority = BindingPriority.Normal)]
     [UsedImplicitly]
     internal sealed class AttributedCommandService : ICommandService {
         private const BindingFlags CommandHandlerBindingFlags =
             BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
 
-        private readonly ISet<ICommand> _commands = new HashSet<ICommand>();
+        private readonly IDictionary<object, ISet<ICommand>> _commands = new Dictionary<object, ISet<ICommand>>();
         private readonly ILogger _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttributedCommandService"/> class.
+        ///     Initializes a new instance of the <see cref="AttributedCommandService" /> class.
         /// </summary>
         /// <param name="logger">The logger instance.</param>
         public AttributedCommandService(ILogger logger) {
@@ -29,11 +29,14 @@ namespace OrionShock.Commands.Attributed {
         }
 
         /// <inheritdoc />
-        public ICommand GetCommand(string name) => _commands.FirstOrDefault(c => c.Name == name);
+        public ICommand GetCommand(string name) {
+            return _commands.Values.SelectMany(c => c).FirstOrDefault(c => c.Name == name);
+        }
 
         /// <inheritdoc />
-        public IEnumerable<ICommand> GetCommands(Predicate<ICommand> filter = null) =>
-            _commands.Where(c => filter?.Invoke(c) ?? true);
+        public IEnumerable<ICommand> GetCommands(Predicate<ICommand> filter = null) {
+            return _commands.Values.SelectMany(c => c).Where(c => filter?.Invoke(c) ?? true);
+        }
 
         /// <inheritdoc />
         public void Deregister(object obj) {
@@ -42,25 +45,23 @@ namespace OrionShock.Commands.Attributed {
 
         /// <inheritdoc />
         public void Register(object obj) {
-            var commandHandlers = from method in obj.GetType().GetMethods(CommandHandlerBindingFlags)
-                                  let commandAttribute = method.GetCustomAttribute<CommandAttribute>()
-                                  where commandAttribute != null
-                                  select (commandAttribute, method);
-            foreach (var (commandAttribute, handlerMethod) in commandHandlers) {
-                if (handlerMethod.ReturnType != typeof(void)) {
-                    _logger.Warning($"Command handler '{handlerMethod.Name}' does not return void. Skipping");
+            if (obj is null) {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            var command = _commands.GetValueOrDefault(obj, new HashSet<ICommand>());
+            foreach (var method in obj.GetType().GetMethods(CommandHandlerBindingFlags)) {
+                var commandAttribute = method.GetCustomAttribute<CommandAttribute>();
+                if (commandAttribute is null) {
                     continue;
                 }
 
-                var isConsoleAllowed = handlerMethod.GetCustomAttribute<DisallowConsoleAttribute>() is null;
-                var command = new AttributedCommand(
-                    Parsers.Instance,
-                    commandAttribute.Name,
-                    commandAttribute.Description,
-                    isConsoleAllowed,
-                    handlerMethod,
-                    obj);
-                _commands.Add(command);
+                if (method.ReturnType != typeof(void)) {
+                    _logger.Warning($"Command handler '{method.Name}' does not return void. Skipping");
+                    continue;
+                }
+
+                var isConsoleAllowed = method.GetCustomAttribute<DisallowConsoleAttribute>() is null;
             }
         }
     }

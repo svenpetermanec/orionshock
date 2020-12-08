@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 
 namespace OrionShock.Commands.Attributed {
-
     /// <summary>
     ///     Represents a command input analyzer. This class lexes an input string to extract meaningful information.
     /// </summary>
@@ -74,7 +73,9 @@ namespace OrionShock.Commands.Attributed {
         }
 
         private static string ParseCommandName(
-            IReadOnlyCollection<string> availableCommandNames, IReadOnlyList<string> tokens, ref int index) {
+            IReadOnlyCollection<string> availableCommandNames,
+            IReadOnlyList<string> tokens,
+            ref int index) {
             Debug.Assert(tokens.Count > 0, "tokens > 0");
 
             var commandName = default(string);
@@ -95,7 +96,8 @@ namespace OrionShock.Commands.Attributed {
         }
 
         private static Dictionary<string, string> ParseOptionals(
-            IReadOnlyList<string> tokens, ref int index) {
+            IReadOnlyList<string> tokens,
+            ref int index) {
             var currentOption = default(string);
             var options = new Dictionary<string, string>();
             for (var i = index; i < tokens.Count; ++i) {
@@ -142,7 +144,7 @@ namespace OrionShock.Commands.Attributed {
             var isEscaped = false;
             foreach (var currentCharacter in input) {
                 switch (currentCharacter) {
-                    case '\\':
+                    case '\\': {
                         if (isEscaped) {
                             stringBuilder.Append(currentCharacter);
                             isEscaped = false;
@@ -151,40 +153,41 @@ namespace OrionShock.Commands.Attributed {
 
                         isEscaped = true;
                         break;
+                    }
 
                     case ' ':
                     case '\t':
                     case '\n': {
-                            if (inQuotes || isEscaped) {
-                                stringBuilder.Append(currentCharacter);
-                                isEscaped = false;
-                            }
-                            else {
-                                if (stringBuilder.Length == 0) {
-                                    continue;
-                                }
-
-                                CommitPendingArgument();
-                            }
-
-                            break;
+                        if (inQuotes || isEscaped) {
+                            stringBuilder.Append(currentCharacter);
+                            isEscaped = false;
                         }
-
-                    case '"': {
-                            if (isEscaped) {
-                                stringBuilder.Append(currentCharacter);
-                                isEscaped = false;
-                                continue;
-                            }
-
-                            inQuotes = !inQuotes;
-                            if (inQuotes) {
+                        else {
+                            if (stringBuilder.Length == 0) {
                                 continue;
                             }
 
                             CommitPendingArgument();
-                            break;
                         }
+
+                        break;
+                    }
+
+                    case '"': {
+                        if (isEscaped) {
+                            stringBuilder.Append(currentCharacter);
+                            isEscaped = false;
+                            continue;
+                        }
+
+                        inQuotes = !inQuotes;
+                        if (inQuotes) {
+                            continue;
+                        }
+
+                        CommitPendingArgument();
+                        break;
+                    }
 
                     default:
                         stringBuilder.Append(currentCharacter);

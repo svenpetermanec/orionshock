@@ -1,14 +1,13 @@
 ﻿using OrionShock.DataLayer;
 
 namespace OrionShock.Warps {
-
     /// <summary>
-    /// Represents an OrionShock warp.
+    ///     Represents an OrionShock warp.
     /// </summary>
     [Table("Warps")]
     internal sealed class OrionShockWarp : DataModelBase, IWarp {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrionShockWarp"/> class.
+        ///     Initializes a new instance of the <see cref="OrionShockWarp" /> class.
         /// </summary>
         /// <param name="worldId">The world ID.</param>
         /// <param name="name">The name.</param>
@@ -22,22 +21,22 @@ namespace OrionShock.Warps {
         }
 
         /// <summary>
-        /// Gets the world ID.
+        ///     Gets the world ID.
         /// </summary>
         [Column("WorldId")]
         [PrimaryKey("PK")]
         public long WorldId { get; init; }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [Column("Name", IsUnique = true)]
         [PrimaryKey("PK")]
         public string Name { get; init; }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [Column("X")]
         public int TileX { get; init; }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [Column("Y")]
         public int TileY { get; init; }
     }
