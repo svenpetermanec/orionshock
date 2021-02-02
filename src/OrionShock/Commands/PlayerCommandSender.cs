@@ -11,10 +11,6 @@ namespace OrionShock.Commands
     /// <summary>
     ///     Provides extension methods for the <see cref="PlayerCommandSender" /> type.
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type",
-        Justification = "Readability.")]
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name",
-        Justification = "Code is reorganized by StyleCop.")]
     public static class PlayerCommandSenderExtensions
     {
         /// <summary>
