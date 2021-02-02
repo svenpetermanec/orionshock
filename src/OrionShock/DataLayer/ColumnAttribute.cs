@@ -1,16 +1,19 @@
 ﻿using System;
 
-namespace OrionShock.DataLayer {
+namespace OrionShock.DataLayer
+{
     /// <summary>
     ///     Describes a column in a table.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ColumnAttribute : Attribute {
+    public sealed class ColumnAttribute : Attribute
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnAttribute" /> class.
         /// </summary>
         /// <param name="name">The column's name.</param>
-        public ColumnAttribute(string name) {
+        public ColumnAttribute(string name)
+        {
             Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 

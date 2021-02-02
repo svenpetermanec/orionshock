@@ -1,13 +1,15 @@
 ﻿using JetBrains.Annotations;
 using Orion.Core;
 
-namespace OrionShock.DataLayer {
+namespace OrionShock.DataLayer
+{
     /// <summary>
     ///     Describes a repository. <i>Repositories should implement <see cref="RepositoryBase{T}" />!</i>
     /// </summary>
     /// <typeparam name="T">The type of objects this repository works with.</typeparam>
     [Service(ServiceScope.Transient)]
-    public interface IRepository<T> {
+    public interface IRepository<T>
+    {
         /// <summary>
         ///     Inserts a given object into the database.
         /// </summary>

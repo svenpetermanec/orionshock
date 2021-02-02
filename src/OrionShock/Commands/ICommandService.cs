@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Orion.Core;
 
-namespace OrionShock.Commands {
+namespace OrionShock.Commands
+{
     /// <summary>
     ///     Represents a command service.
     /// </summary>
     [PublicAPI]
     [Service(ServiceScope.Singleton)]
-    public interface ICommandService {
+    public interface ICommandService
+    {
         /// <summary>
         ///     Deregisters commands defined by the specified object.
         /// </summary>

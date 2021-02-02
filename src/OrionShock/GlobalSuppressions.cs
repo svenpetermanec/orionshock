@@ -27,7 +27,3 @@ using System.Diagnostics.CodeAnalysis;
 [assembly:
     SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1500:Braces for multi-line statements should not share line",
         Justification = "Code Style")]
-[assembly:
-    SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1407:Arithmetic expressions should declare precedence",
-        Justification = "Does not aid readability.", Scope = "member",
-        Target = "~M:OrionShock.OrionShockCommands.SetTime(System.Int32,System.Int32)")]

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace OrionShock.Extensions {
+namespace OrionShock.Extensions
+{
     /// <summary>
     ///     Provides extension methods for the <see cref="IDictionary{TKey,TValue}" /> type.
     /// </summary>
-    internal static class IDictionaryExtensions {
+    internal static class IDictionaryExtensions
+    {
         /// <summary>
         ///     Gets the value for a given key in the dictionary, or a default value if the key does not exist.
         /// </summary>
@@ -24,12 +26,15 @@ namespace OrionShock.Extensions {
             [NotNull] this IDictionary<TKey, TValue> dictionary,
             [NotNull] TKey key,
             TValue defaultValue = default)
-            where TKey : notnull {
-            if (dictionary is null) {
+            where TKey : notnull
+        {
+            if (dictionary is null)
+            {
                 throw new ArgumentNullException(nameof(dictionary));
             }
 
-            if (key is null) {
+            if (key is null)
+            {
                 throw new ArgumentNullException(nameof(key));
             }
 

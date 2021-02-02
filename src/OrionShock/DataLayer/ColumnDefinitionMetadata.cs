@@ -1,10 +1,12 @@
 ﻿using System;
 
-namespace OrionShock.DataLayer {
+namespace OrionShock.DataLayer
+{
     /// <summary>
     ///     Describes a column in a table.
     /// </summary>
-    internal sealed class ColumnDefinitionMetadata {
+    internal sealed class ColumnDefinitionMetadata
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnDefinitionMetadata" /> class.
         /// </summary>
@@ -12,7 +14,8 @@ namespace OrionShock.DataLayer {
         /// <param name="isUnique">A value indicating whether the column is unique.</param>
         /// <param name="isPrimaryKey">A value indicating whether the column is a primary key.</param>
         /// <param name="dataType">The type of data this column stores.</param>
-        public ColumnDefinitionMetadata(string name, bool isUnique, bool isPrimaryKey, Type dataType) {
+        public ColumnDefinitionMetadata(string name, bool isUnique, bool isPrimaryKey, Type dataType)
+        {
             Name = name;
             IsUnique = isUnique;
             IsPrimaryKey = isPrimaryKey;

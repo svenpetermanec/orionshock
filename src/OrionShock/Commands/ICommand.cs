@@ -1,11 +1,13 @@
 ﻿using JetBrains.Annotations;
 
-namespace OrionShock.Commands {
+namespace OrionShock.Commands
+{
     /// <summary>
     ///     Describes a command.
     /// </summary>
     [PublicAPI]
-    public interface ICommand {
+    public interface ICommand
+    {
         /// <summary>
         ///     Gets a value indicating whether the console can execute the command.
         /// </summary>

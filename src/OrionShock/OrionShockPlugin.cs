@@ -5,13 +5,15 @@ using OrionShock.Commands;
 using OrionShock.Configuration;
 using Serilog;
 
-namespace OrionShock {
+namespace OrionShock
+{
     /// <summary>
     ///     Represents the main entry point for the `OrionShock` plugin.
     /// </summary>
     [Plugin("OrionShock", Author = "ivanbiljan")]
     [UsedImplicitly]
-    public sealed class OrionShockPlugin : OrionPlugin {
+    public sealed class OrionShockPlugin : OrionPlugin
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="OrionShockPlugin" /> class.
         /// </summary>
@@ -24,7 +26,8 @@ namespace OrionShock {
             ILogger log,
             IConfigurationService<OrionShockConfig> configurationService,
             ICommandService commandService)
-            : base(server, log) {
+            : base(server, log)
+        {
             // Set up event handlers
             server.Events.RegisterHandlers(new EventHandlers(configurationService, commandService), log);
 

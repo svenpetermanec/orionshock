@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace OrionShock.DataLayer {
+namespace OrionShock.DataLayer
+{
     /// <summary>
     ///     Represents a foreign key in a table.
     /// </summary>
-    internal sealed class ForeignKey {
+    internal sealed class ForeignKey
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ForeignKey" /> class.
         /// </summary>
         /// <param name="columns">The columns that comprise the foreign key.</param>
         /// <param name="referencedTable">The referenced table.</param>
         /// <param name="referencedColumns">The referenced columns.</param>
-        public ForeignKey(IEnumerable<string> columns, string referencedTable, IEnumerable<string> referencedColumns) {
+        public ForeignKey(IEnumerable<string> columns, string referencedTable, IEnumerable<string> referencedColumns)
+        {
             Columns = columns.ToImmutableArray();
             ReferencedTable = referencedTable;
             ReferencedColumns = referencedColumns.ToImmutableArray();

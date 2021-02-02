@@ -7,15 +7,18 @@ using System.Text;
 using Dapper;
 using OrionShock.DataLayer;
 
-namespace OrionShock.Extensions {
+namespace OrionShock.Extensions
+{
     /// <summary>
     ///     <summary>
     ///         Provides extension methods for the <see cref="IDbConnection" /> type.
     ///     </summary>
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name",
         Justification = "Personal style")]
-    public static class IDbConnectionExtensions {
-        private static readonly IDictionary<Type, string> NetToSqliteTypeMapping = new Dictionary<Type, string> {
+    public static class IDbConnectionExtensions
+    {
+        private static readonly IDictionary<Type, string> NetToSqliteTypeMapping = new Dictionary<Type, string>
+        {
             [typeof(bool)] = "INTEGER",
             [typeof(byte)] = "INTEGER",
             [typeof(sbyte)] = "INTEGER",
@@ -37,50 +40,60 @@ namespace OrionShock.Extensions {
         /// <typeparam name="T">The type of entities this table stores, i.e the model used to interact with the table.</typeparam>
         /// <param name="connection">The database connection.</param>
         public static void CreateTable<T>(this IDbConnection connection)
-            where T : DataModelBase, new() {
-            if (connection is null) {
+            where T : DataModelBase, new()
+        {
+            if (connection is null)
+            {
                 throw new ArgumentNullException(nameof(connection));
             }
 
             var model = new T();
             var tableBuilder = new StringBuilder($"CREATE TABLE IF NOT EXISTS `{model.TableName}` (");
             using var columnDefinitionEnumerator = model.GetColumns().GetEnumerator();
-            if (columnDefinitionEnumerator.Current is null) {
+            if (columnDefinitionEnumerator.Current is null)
+            {
                 throw new InvalidOperationException($"Cannot create an empty table ('{model.TableName}').");
             }
 
             var primaryKeys = new List<string>();
 
             AppendColumn();
-            while (columnDefinitionEnumerator.MoveNext()) {
+            while (columnDefinitionEnumerator.MoveNext())
+            {
                 Debug.Assert(columnDefinitionEnumerator.Current != null, "columnDefinitionEnumerator.Current != null");
                 tableBuilder.Append(',');
                 AppendColumn();
             }
 
-            if (primaryKeys.Count > 0) {
+            if (primaryKeys.Count > 0)
+            {
                 tableBuilder.Append($", PRIMARY KEYS({string.Join(", ", primaryKeys)}");
             }
 
             tableBuilder.Append(");");
             connection.Execute(tableBuilder.ToString());
 
-            void AppendColumn() {
+            void AppendColumn()
+            {
                 var column = columnDefinitionEnumerator.Current;
                 var sqliteType = NetToSqliteTypeMapping.GetValueOrDefault(column.DataType);
-                if (sqliteType == default) {
+                if (sqliteType == default)
+                {
                     throw new NotSupportedException($"No matching SQLite type found for '{column.DataType}'");
                 }
 
                 tableBuilder.Append($" {column.Name} {sqliteType}");
-                if (column.IsPrimaryKey) {
+                if (column.IsPrimaryKey)
+                {
                     primaryKeys.Add(column.Name);
                 }
-                else if (!typeof(Nullable<>).IsAssignableFrom(column.DataType)) {
+                else if (!typeof(Nullable<>).IsAssignableFrom(column.DataType))
+                {
                     tableBuilder.Append(" NOT NULL");
                 }
 
-                if (column.IsUnique) {
+                if (column.IsUnique)
+                {
                     tableBuilder.Append(" UNIQUE");
                 }
             }

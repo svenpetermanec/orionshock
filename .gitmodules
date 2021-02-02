@@ -4,3 +4,6 @@
 [submodule "orion-core"]
 	path = orion-core
 	url = https://github.com/ivanbiljan/orion-core
+[submodule "Remus"]
+	path = Remus
+	url = https://github.com/ivanbiljan/Remus

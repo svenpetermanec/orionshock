@@ -2,11 +2,13 @@
 using OrionShock.Commands;
 using OrionShock.Configuration;
 
-namespace OrionShock {
+namespace OrionShock
+{
     /// <summary>
     ///     Provides methods that handle various Orion events.
     /// </summary>
-    internal sealed partial class EventHandlers {
+    internal sealed partial class EventHandlers
+    {
         private readonly ICommandService _commandService;
         private readonly IConfigurationService<OrionShockConfig> _configurationService;
 
@@ -17,7 +19,8 @@ namespace OrionShock {
         /// <param name="commandService">The command service instance.</param>
         public EventHandlers(
             IConfigurationService<OrionShockConfig> configurationService,
-            ICommandService commandService) {
+            ICommandService commandService)
+        {
             _configurationService =
                 configurationService ?? throw new ArgumentNullException(nameof(configurationService));
             _commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));

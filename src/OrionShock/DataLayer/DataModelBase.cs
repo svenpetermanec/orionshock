@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace OrionShock.DataLayer {
+namespace OrionShock.DataLayer
+{
     /// <summary>
     ///     Represents a base class for a data model (i.e, a table).
     /// </summary>
-    public abstract class DataModelBase {
+    public abstract class DataModelBase
+    {
         /// <summary>
         ///     Gets the table name.
         /// </summary>
-        internal string TableName {
-            get {
+        internal string TableName
+        {
+            get
+            {
                 var type = GetType();
                 return type.GetCustomAttribute<TableAttribute>()?.Name ?? type.Name;
             }
@@ -22,26 +26,32 @@ namespace OrionShock.DataLayer {
         ///     <see cref="ColumnAttribute" />.
         /// </summary>
         /// <returns>An enumerable collection of column definitions.</returns>
-        internal IEnumerable<ColumnDefinitionMetadata> GetColumns() {
+        internal IEnumerable<ColumnDefinitionMetadata> GetColumns()
+        {
             var type = GetType();
 
             // var isOptIn = type.GetCustomAttribute<TableAttribute>()?.SchemaCreationOption == SchemaCreationOptions.OptIn;
             var members = type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            for (var i = 0; i < members.Length; ++i) {
+            for (var i = 0; i < members.Length; ++i)
+            {
                 var member = members[i];
                 var columnAttribute = member.GetCustomAttribute<ColumnAttribute>();
-                if (columnAttribute is null) {
+                if (columnAttribute is null)
+                {
                     continue;
                 }
 
                 Type columnType;
-                if (member is FieldInfo fieldInfo) {
+                if (member is FieldInfo fieldInfo)
+                {
                     columnType = fieldInfo.FieldType;
                 }
-                else if (member is PropertyInfo propertyInfo) {
+                else if (member is PropertyInfo propertyInfo)
+                {
                     columnType = propertyInfo.PropertyType;
                 }
-                else {
+                else
+                {
                     continue;
                 }
 

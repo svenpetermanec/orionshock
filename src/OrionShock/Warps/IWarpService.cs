@@ -1,8 +1,10 @@
-﻿namespace OrionShock.Warps {
+﻿namespace OrionShock.Warps
+{
     /// <summary>
     ///     Provides a warp service.
     /// </summary>
-    public interface IWarpService {
+    public interface IWarpService
+    {
         /// <summary>
         ///     Creates a warp.
         /// </summary>

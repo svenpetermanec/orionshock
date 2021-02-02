@@ -1,11 +1,13 @@
 ﻿using OrionShock.DataLayer;
 
-namespace OrionShock.Warps {
+namespace OrionShock.Warps
+{
     /// <summary>
     ///     Represents an OrionShock warp.
     /// </summary>
     [Table("Warps")]
-    internal sealed class OrionShockWarp : DataModelBase, IWarp {
+    internal sealed class OrionShockWarp : DataModelBase, IWarp
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="OrionShockWarp" /> class.
         /// </summary>
@@ -13,7 +15,8 @@ namespace OrionShock.Warps {
         /// <param name="name">The name.</param>
         /// <param name="tileX">The X coordinate.</param>
         /// <param name="tileY">The Y coordinate.</param>
-        public OrionShockWarp(long worldId, string name, int tileX, int tileY) {
+        public OrionShockWarp(long worldId, string name, int tileX, int tileY)
+        {
             WorldId = worldId;
             Name = name;
             TileX = tileX;

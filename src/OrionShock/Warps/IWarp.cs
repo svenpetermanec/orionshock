@@ -1,8 +1,10 @@
-﻿namespace OrionShock.Warps {
+﻿namespace OrionShock.Warps
+{
     /// <summary>
     ///     Describes a warp.
     /// </summary>
-    public interface IWarp {
+    public interface IWarp
+    {
         /// <summary>
         ///     Gets the name.
         /// </summary>

@@ -1,13 +1,15 @@
 ﻿using Orion.Core;
 
-namespace OrionShock.Configuration {
+namespace OrionShock.Configuration
+{
     /// <summary>
     ///     Describes a configuration service. Facilitates reading and writing configuration files.
     /// </summary>
     /// <typeparam name="TConfiguration">The type of configuration.</typeparam>
     [Service(ServiceScope.Transient)]
     public interface IConfigurationService<out TConfiguration>
-        where TConfiguration : new() {
+        where TConfiguration : new()
+    {
         /// <summary>
         ///     Gets the underlying configuration file.
         /// </summary>

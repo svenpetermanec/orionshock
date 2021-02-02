@@ -7,25 +7,32 @@ using OrionShock.Commands;
 using OrionShock.Commands.Attributed;
 using OrionShock.Exceptions;
 
-namespace OrionShock {
-    internal sealed partial class EventHandlers {
+namespace OrionShock
+{
+    internal sealed partial class EventHandlers
+    {
         [EventHandler("orionshock-playerchat", Priority = EventPriority.Normal)]
-        public void HandleServerChat(ServerCommandEvent @event) {
+        public void HandleServerChat(ServerCommandEvent @event)
+        {
             var message = @event.Input;
-            if (string.IsNullOrWhiteSpace(message)) {
+            if (string.IsNullOrWhiteSpace(message))
+            {
                 return;
             }
 
             var config = _configurationService.Configuration;
-            if (!message.StartsWith(config.CommandSpecifier) && !message.StartsWith(config.CommandSilentSpecifier)) {
+            if (!message.StartsWith(config.CommandSpecifier) && !message.StartsWith(config.CommandSilentSpecifier))
+            {
                 return;
             }
 
-            try {
+            try
+            {
                 message = message[1..];
                 var availableCommandNames = _commandService.GetCommands().Select(c => c.Name).ToList();
                 var commandInput = CommandInputMetadata.Parse(message, availableCommandNames);
-                if (string.IsNullOrWhiteSpace(commandInput.CommandName)) {
+                if (string.IsNullOrWhiteSpace(commandInput.CommandName))
+                {
                     Console.WriteLine("[OrionShock] Invalid command input.");
                     return;
                 }
@@ -36,7 +43,8 @@ namespace OrionShock {
                 command.Execute(new CommandContext(new ConsoleCommandSender(), message));
                 @event.Cancel();
             }
-            catch (CommandSyntaxException e) {
+            catch (CommandSyntaxException e)
+            {
                 Console.WriteLine(e.Message);
             }
         }

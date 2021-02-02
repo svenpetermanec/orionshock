@@ -1,8 +1,10 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace OrionShock.Extensions {
-    internal static class TypeExtensions {
+namespace OrionShock.Extensions
+{
+    internal static class TypeExtensions
+    {
         /// <summary>
         ///     Returns the default value for a type.
         /// </summary>
@@ -10,8 +12,10 @@ namespace OrionShock.Extensions {
         /// <returns>The default value for the type.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="type" /> is <see langword="null" />.</exception>
         [CanBeNull]
-        public static object GetDefaultValue([NotNull] this Type type) {
-            if (type is null) {
+        public static object GetDefaultValue([NotNull] this Type type)
+        {
+            if (type is null)
+            {
                 throw new ArgumentNullException(nameof(type));
             }
 
