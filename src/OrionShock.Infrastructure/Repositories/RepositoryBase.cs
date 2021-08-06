@@ -10,7 +10,7 @@ namespace OrionShock.Infrastructure.Repositories
     /// <summary>
     /// Represents the base class for a repository that manages entities of type <typeparamref name="T"/>.
     /// </summary>
-    /// <remarks>CRUD operations provided by this class will not persist unless the</remarks>
+    /// <remarks>CRUD operations provided by this class will not persist unless wrapped in a <see cref="IUnitOfWork"/>.</remarks>
     /// <typeparam name="T">The type of entity this repository manages.</typeparam>
     public class RepositoryBase<T> : IRepository<T> where T : EntityBase
     {
