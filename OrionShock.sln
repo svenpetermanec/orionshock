@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrionShock.Tests", "tests\O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orion.Core", "src\orion-core\src\Orion.Core\Orion.Core.csproj", "{E0FBD14B-37B9-40E5-8754-D125759110B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Core", "OrionShock.Core\OrionShock.Core.csproj", "{E445AA1B-9F61-47B5-AD06-23F05363C5A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Core", "src\OrionShock.Core\OrionShock.Core.csproj", "{E445AA1B-9F61-47B5-AD06-23F05363C5A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Infrastructure", "OrionShock.Infrastructure\OrionShock.Infrastructure.csproj", "{6E412B97-DEBD-482D-8747-3EFD94D29BFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Infrastructure", "src\OrionShock.Infrastructure\OrionShock.Infrastructure.csproj", "{6E412B97-DEBD-482D-8747-3EFD94D29BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
