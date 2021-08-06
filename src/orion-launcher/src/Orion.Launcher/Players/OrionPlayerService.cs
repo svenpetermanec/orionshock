@@ -281,7 +281,7 @@ namespace Orion.Launcher.Players
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TPacket MakePacket<TPacket>(Span<byte> span) where TPacket : IPacket
         {
-            TPacket packet = default;
+            TPacket? packet = default;
 
             // `UnknownPacket` is a special case since it has no default constructor.
             if (typeof(TPacket) == typeof(UnknownPacket))

@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Orion.Core;
 using Orion.Core.Events;
-using OrionShock.Commands;
 using OrionShock.Configuration;
 using Remus.Extensions;
 using Serilog;

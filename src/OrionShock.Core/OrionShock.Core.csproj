@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\orion-core\src\Orion.Core\Orion.Core.csproj" />
+    <ProjectReference Include="..\orion-core\src\Orion.Core\Orion.Core.csproj" />
   </ItemGroup>
 
 </Project>
