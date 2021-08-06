@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 using Orion.Core;
+using OrionShock.Core.Abstractions.Services;
 
 namespace OrionShock.Configuration
 {
