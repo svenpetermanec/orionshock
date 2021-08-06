@@ -10,11 +10,8 @@ using OrionShock.DataLayer;
 namespace OrionShock.Extensions
 {
     /// <summary>
-    ///     <summary>
-    ///         Provides extension methods for the <see cref="IDbConnection" /> type.
-    ///     </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name should match first type name",
-        Justification = "Personal style")]
+    /// Provides extension methods for the <see cref="IDbConnection" /> type.
+    /// </summary>
     public static class IDbConnectionExtensions
     {
         private static readonly IDictionary<Type, string> NetToSqliteTypeMapping = new Dictionary<Type, string>

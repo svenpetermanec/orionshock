@@ -1,8 +1,11 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 using Orion.Core;
 using Orion.Core.Events;
 using OrionShock.Commands;
 using OrionShock.Configuration;
+using Remus.Extensions;
 using Serilog;
 
 namespace OrionShock
@@ -28,11 +31,10 @@ namespace OrionShock
             ICommandService commandService)
             : base(server, log)
         {
+            var serviceProvider = new ServiceCollection().AddRemus().BuildServiceProvider();
+                
             // Set up event handlers
             server.Events.RegisterHandlers(new EventHandlers(configurationService, commandService), log);
-
-            // Register OrionShock commands
-            commandService.Register(new OrionShockCommands(server));
         }
     }
 }
