@@ -9,7 +9,7 @@ namespace OrionShock.Infrastructure.Models
     /// <summary>
     /// Represents the base class for a table entity.
     /// </summary>
-    public abstract class ModelBase
+    public abstract class EntityBase
     {
         public Guid Id { get; set; }
     }
