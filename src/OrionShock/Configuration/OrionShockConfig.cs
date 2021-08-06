@@ -14,12 +14,12 @@ namespace OrionShock.Configuration
         /// <summary>
         ///     Gets or sets the silent command prefix.
         /// </summary>
-        public string CommandSilentSpecifier { get; set; } = ".";
+        public string SilentCommandPrefix { get; set; } = ".";
 
         /// <summary>
         ///     Gets or sets the command prefix.
         /// </summary>
-        public string CommandSpecifier { get; set; } = "/";
+        public string CommandPrefix { get; set; } = "/";
 
         /// <summary>
         ///     Gets a dictionary of connection strings.

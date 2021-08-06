@@ -1,7 +1,13 @@
-﻿namespace OrionShock.Warps
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OrionShock.Core.Abstractions.Services
 {
     /// <summary>
-    ///     Provides a warp service.
+    ///     Defines a contract that describes a warp service.
     /// </summary>
     public interface IWarpService
     {
