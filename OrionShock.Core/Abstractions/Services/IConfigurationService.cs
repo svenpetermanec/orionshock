@@ -1,0 +1,35 @@
+﻿using Orion.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OrionShock.Core.Abstractions.Services
+{
+    /// <summary>
+    ///     Describes a configuration service. Facilitates reading and writing configuration files.
+    /// </summary>
+    /// <typeparam name="TConfiguration">The type of configuration.</typeparam>
+    [Service(ServiceScope.Transient)]
+    public interface IConfigurationService<out TConfiguration>
+        where TConfiguration : new()
+    {
+        /// <summary>
+        ///     Gets the underlying configuration file.
+        /// </summary>
+        TConfiguration Configuration { get; }
+
+        /// <summary>
+        ///     Reads the configuration from the specified file.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        void Read(string path);
+
+        /// <summary>
+        ///     Writes the underlying configuration to the specified file.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        void Write(string path);
+    }
+}

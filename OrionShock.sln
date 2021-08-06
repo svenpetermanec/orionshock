@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30406.217
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31512.422
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock", "src\OrionShock\OrionShock.csproj", "{DA542127-773A-4DA6-9340-E55957421D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrionShock", "src\OrionShock\OrionShock.csproj", "{DA542127-773A-4DA6-9340-E55957421D77}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orion.Launcher", "src\orion-launcher\src\Orion.Launcher\Orion.Launcher.csproj", "{8540F328-FF43-4A2A-88D6-BDEE66D573A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Tests", "tests\OrionShock.Tests\OrionShock.Tests.csproj", "{1F44A3BD-A438-4E66-B7AD-216C3C25DC64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrionShock.Tests", "tests\OrionShock.Tests\OrionShock.Tests.csproj", "{1F44A3BD-A438-4E66-B7AD-216C3C25DC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orion.Core", "src\orion-core\src\Orion.Core\Orion.Core.csproj", "{E0FBD14B-37B9-40E5-8754-D125759110B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orion.Core", "src\orion-core\src\Orion.Core\Orion.Core.csproj", "{E0FBD14B-37B9-40E5-8754-D125759110B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Core", "OrionShock.Core\OrionShock.Core.csproj", "{E445AA1B-9F61-47B5-AD06-23F05363C5A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrionShock.Infrastructure", "OrionShock.Infrastructure\OrionShock.Infrastructure.csproj", "{6E412B97-DEBD-482D-8747-3EFD94D29BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{E0FBD14B-37B9-40E5-8754-D125759110B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0FBD14B-37B9-40E5-8754-D125759110B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0FBD14B-37B9-40E5-8754-D125759110B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E445AA1B-9F61-47B5-AD06-23F05363C5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E445AA1B-9F61-47B5-AD06-23F05363C5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E445AA1B-9F61-47B5-AD06-23F05363C5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E445AA1B-9F61-47B5-AD06-23F05363C5A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E412B97-DEBD-482D-8747-3EFD94D29BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E412B97-DEBD-482D-8747-3EFD94D29BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E412B97-DEBD-482D-8747-3EFD94D29BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E412B97-DEBD-482D-8747-3EFD94D29BFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

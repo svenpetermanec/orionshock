@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\OrionShock.Core\OrionShock.Core.csproj" />
     <ProjectReference Include="..\orion-core\src\Orion.Core\Orion.Core.csproj" />
     <ProjectReference Include="..\orion-launcher\src\Orion.Launcher\Orion.Launcher.csproj" />
     <ProjectReference Include="..\..\..\Remus\src\Remus\Remus.csproj" />
