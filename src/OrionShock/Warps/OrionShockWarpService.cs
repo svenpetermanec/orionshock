@@ -22,8 +22,18 @@ namespace OrionShock.Warps
 
         public void CreateWarp(IWarp warp)
         {
+            if (warp is null)
+            {
+                throw new ArgumentNullException(nameof(warp));
+            }
+        }
+
+        public IWarp Get(int tileX, int tileY)
+        {
             throw new NotImplementedException();
         }
+
+        public IWarp Get(string name) => OrionShockWarp.FromModel(_warpRepository.GetWarpByName(name));
 
         public void RemoveWarp(IWarp warp)
         {

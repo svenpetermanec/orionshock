@@ -23,5 +23,20 @@ namespace OrionShock.Core.Abstractions.Services
         /// </summary>
         /// <param name="warp">The warp.</param>
         void RemoveWarp(IWarp warp);
+
+        /// <summary>
+        /// Gets the warp at the given coordinates.
+        /// </summary>
+        /// <param name="tileX">The X coordinate.</param>
+        /// <param name="tileY">The Y coordinate.</param>
+        /// <returns>The warp at the specified coordinates.</returns>
+        IWarp Get(int tileX, int tileY);
+
+        /// <summary>
+        /// Gets the warp with the given name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The warp with the given name.</returns>
+        IWarp Get(string name);
     }
 }
