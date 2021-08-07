@@ -14,4 +14,8 @@
     <ProjectReference Include="..\OrionShock.Core\OrionShock.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Configurations\" />
+  </ItemGroup>
+
 </Project>
