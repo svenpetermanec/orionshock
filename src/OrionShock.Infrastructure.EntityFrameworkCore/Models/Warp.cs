@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrionShock.Infrastructure.Shared.Models
 {
-    public sealed class Warp : EntityBase, IWarp
+    public sealed class Warp : EntityBase
     {
         private Warp()
         {

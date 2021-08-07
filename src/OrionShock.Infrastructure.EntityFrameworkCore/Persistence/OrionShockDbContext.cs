@@ -2,7 +2,7 @@
 using OrionShock.Infrastructure.Shared.Models;
 using System;
 
-namespace OrionShock.Infrastructure.EntityFrameworkCore
+namespace OrionShock.Infrastructure.EntityFrameworkCore.Persistence
 {
     public sealed class OrionShockDbContext : DbContext
     {
@@ -12,5 +12,12 @@ namespace OrionShock.Infrastructure.EntityFrameworkCore
         }
 
         public DbSet<Warp> Warps { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrionShockDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
