@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Infrastructure.Extensions
+namespace OrionShock.Infrastructure.Shared.Extensions
 {
     public static class IServiceCollectionExtensions
     {

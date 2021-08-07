@@ -1,11 +1,11 @@
-﻿using OrionShock.Infrastructure.Models;
+﻿using OrionShock.Infrastructure.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Infrastructure.Repositories
+namespace OrionShock.Infrastructure.Shared.Repositories
 {
     /// <summary>
     /// Defines a contract that describes a repository.

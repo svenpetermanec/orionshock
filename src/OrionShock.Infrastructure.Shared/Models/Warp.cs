@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Infrastructure.Models
-{   
+namespace OrionShock.Infrastructure.Shared.Models
+{
     public sealed class Warp : EntityBase, IWarp
     {
+        private Warp()
+        {
+        }
+
         public string Name { get; set; }
 
         public int TileX { get; set; }

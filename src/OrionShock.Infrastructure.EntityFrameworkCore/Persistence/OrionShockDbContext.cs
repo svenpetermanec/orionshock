@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrionShock.Infrastructure.Models;
+using OrionShock.Infrastructure.Shared.Models;
 using System;
 
-namespace OrionShock.Infrastructure
+namespace OrionShock.Infrastructure.EntityFrameworkCore
 {
     public sealed class OrionShockDbContext : DbContext
     {

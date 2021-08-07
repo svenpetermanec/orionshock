@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Infrastructure.Models
+namespace OrionShock.Infrastructure.Shared.Models
 {
     /// <summary>
     /// Represents the base class for a table entity.
