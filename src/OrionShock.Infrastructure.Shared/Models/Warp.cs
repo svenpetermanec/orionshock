@@ -1,12 +1,11 @@
 ﻿using OrionShock.Core.Abstractions.Models;
-using OrionShock.Infrastructure.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrionShock.Infrastructure.EntityFrameworkCore.Models
+namespace OrionShock.Infrastructure.Shared.Models
 {
     public sealed class Warp : EntityBase
     {

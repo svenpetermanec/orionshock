@@ -11,8 +11,17 @@ namespace OrionShock.Infrastructure.EntityFrameworkCore.Persistence.Configuratio
 {
     public sealed class WarpConfiguration : IEntityTypeConfiguration<Warp>
     {
-        public void Configure(EntityTypeBuilder<WarpConfiguration> builder)
+        public void Configure(EntityTypeBuilder<Warp> builder)
         {
+            builder.Property(w => w.Name)
+                .HasMaxLength(25)
+                .IsRequired();
+
+            builder.Property(w => w.TileX)
+                .IsRequired();
+
+            builder.Property(w => w.TileY)
+                .IsRequired();
         }
     }
 }
