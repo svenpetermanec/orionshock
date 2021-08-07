@@ -11,7 +11,7 @@ namespace OrionShock.Infrastructure.EntityFrameworkCore.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static void AddOrionShockDbContext(this IServiceCollection serviceCollection, string connectionString)
+        public static void AddEfOrionShockDbContext(this IServiceCollection serviceCollection, string connectionString)
         {
             if (serviceCollection is null)
             {
