@@ -16,7 +16,7 @@ namespace OrionShock.Core.Abstractions.Services
         ///     Creates a warp.
         /// </summary>
         /// <param name="warp">The warp.</param>
-        void CreateWarp(IWarp warp);
+        void CreateWarp(string name, int tileX, int tileY);
 
         /// <summary>
         ///     Removes a warp.
