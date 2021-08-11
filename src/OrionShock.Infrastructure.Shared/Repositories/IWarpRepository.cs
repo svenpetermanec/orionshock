@@ -14,5 +14,7 @@ namespace OrionShock.Infrastructure.Shared.Repositories
     public interface IWarpRepository : IRepository<Warp>
     {
         Warp GetWarpByName(string name);
+
+        Warp GetWarpByPosition(int tileX, int tileY);
     }
 }
