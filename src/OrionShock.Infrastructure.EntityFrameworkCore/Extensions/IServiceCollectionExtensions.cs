@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OrionShock.Infrastructure.EntityFrameworkCore.Persistence;
+using OrionShock.Infrastructure.EntityFrameworkCore.Repositories;
+using OrionShock.Infrastructure.Shared.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,7 @@ namespace OrionShock.Infrastructure.EntityFrameworkCore.Extensions
                 throw new ArgumentNullException(nameof(connectionString));
             }
 
+            serviceCollection.AddSingleton<IWarpRepository, WarpRepository>();
             serviceCollection.AddDbContext<OrionShockDbContext>(opts => opts.UseNpgsql(connectionString));
         }
     }
