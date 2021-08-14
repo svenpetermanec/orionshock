@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OrionShock.Warps
 {
-    [Binding("OrionShockWarpService", Author = "ivanbiljan")]
+    [Binding(nameof(OrionShockWarpService), Author = "ivanbiljan")]
     internal sealed class OrionShockWarpService : IWarpService
     {
         private readonly IMapper _mapper;
@@ -22,8 +22,8 @@ namespace OrionShock.Warps
         public OrionShockWarpService(IServer server, IWarpRepository warpRepository, IMapper mapper)
         {
             _server = server ?? throw new ArgumentNullException(nameof(server));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _warpRepository = warpRepository ?? throw new ArgumentNullException(nameof(warpRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public void CreateWarp(string name, int tileX, int tileY)
@@ -35,24 +35,50 @@ namespace OrionShock.Warps
 
             if (tileX < 0 || tileX > _server.World.Width)
             {
-                throw new ArgumentException(nameof(tileX));
+                throw new ArgumentException(null, nameof(tileX));
             }
 
             if (tileY < 0 || tileY > _server.World.Height)
             {
-                throw new ArgumentException(nameof(tileY));
+                throw new ArgumentException(null, nameof(tileY));
             }
 
             var warp = new OrionShockWarp(name, tileX, tileY);
             _warpRepository.Add(_mapper.Map<Warp>(warp));
         }
 
-        public IWarp Get(int tileX, int tileY) => _mapper.Map<OrionShockWarp>(_warpRepository.GetWarpByPosition(tileX, tileY));
+        public IWarp Get(int tileX, int tileY)
+        {
+            if (tileX < 0 || tileX > _server.World.Width)
+            {
+                throw new ArgumentException(null, nameof(tileX));
+            }
 
-        public IWarp Get(string name) => _mapper.Map<OrionShockWarp>(_warpRepository.GetWarpByName(name));
+            if (tileY < 0 || tileY > _server.World.Height)
+            {
+                throw new ArgumentException(null, nameof(tileY));
+            }
+
+            return _mapper.Map<OrionShockWarp>(_warpRepository.GetWarpByPosition(tileX, tileY));
+        }
+
+        public IWarp Get(string name)
+        {
+            if (name is null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return _mapper.Map<OrionShockWarp>(_warpRepository.GetWarpByName(name));
+        }
 
         public void RemoveWarp(IWarp warp)
         {
+            if (warp is null)
+            {
+                throw new ArgumentNullException(nameof(warp));
+            }
+
             _warpRepository.Delete(_mapper.Map<Warp>((OrionShockWarp)warp));
         }
     }
