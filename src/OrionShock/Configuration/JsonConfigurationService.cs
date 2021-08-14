@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Orion.Core;
 using OrionShock.Core.Abstractions.Services;
 
@@ -13,6 +13,12 @@ namespace OrionShock.Configuration
     internal sealed class JsonConfigurationService<TConfiguration> : IConfigurationService<TConfiguration>
         where TConfiguration : new()
     {
+        private static readonly JsonSerializerOptions SerializerOptions = new()
+        {
+            AllowTrailingCommas = true,
+            WriteIndented = true
+        };
+
         /// <inheritdoc />
         public TConfiguration Configuration { get; private set; } = new TConfiguration();
 
@@ -21,7 +27,7 @@ namespace OrionShock.Configuration
         {
             if (File.Exists(path))
             {
-                Configuration = JsonConvert.DeserializeObject<TConfiguration>(File.ReadAllText(path));
+                Configuration = JsonSerializer.Deserialize<TConfiguration>(File.ReadAllText(path));
                 return;
             }
 
@@ -32,7 +38,7 @@ namespace OrionShock.Configuration
         /// <inheritdoc />
         public void Write(string path)
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(Configuration, Formatting.Indented));
+            File.WriteAllText(path, JsonSerializer.Serialize(Configuration, SerializerOptions));
         }
     }
 }
