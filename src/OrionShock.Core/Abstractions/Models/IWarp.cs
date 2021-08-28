@@ -12,18 +12,18 @@ namespace OrionShock.Core.Abstractions.Models
     public interface IWarp
     {
         /// <summary>
-        ///     Gets the name.
+        ///     Gets or sets the name.
         /// </summary>
-        string Name { get; }
+        string Name { get; set; }
 
         /// <summary>
-        ///     Gets the X coordinate.
+        ///     Gets or sets the X coordinate.
         /// </summary>
-        int TileX { get; }
+        int TileX { get; set; }
 
         /// <summary>
-        ///     Gets the Y coordinate.
+        ///     Gets or sets the Y coordinate.
         /// </summary>
-        int TileY { get; }
+        int TileY { get; set; }
     }
 }

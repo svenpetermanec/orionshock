@@ -17,11 +17,11 @@ namespace OrionShock.Warps
             TileY = tileY;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public int TileX { get; }
+        public int TileX { get; set; }
 
-        public int TileY { get; }
+        public int TileY { get; set; }
 
         public static OrionShockWarp FromModel(Warp warpModel) => new(warpModel.Name, warpModel.TileX, warpModel.TileY);
     }
